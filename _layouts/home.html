@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JK5T88CNCQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-JK5T88CNCQ');
-    </script>
-
     <meta charset="utf-8" />
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
@@ -31,14 +21,19 @@
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
 
-  <body>
+  <body id="home">
     <div class="content-wrapper">
 
-      {% include masthead.html %}
+    {% include masthead.html %}
 
-      <div id="main" role="main" class="container">
-        {{ content }}
-      </div>
+
+    <div class="logo">
+      <img src="{{ site.baseurl }}/images/logo.png" width='900px' height='234px'/>
+    </div>
+
+    <div id="main" role="main" class="container">
+      {{ content }}
+    </div>
 
     </div><!-- /content-wrapper -->
 
