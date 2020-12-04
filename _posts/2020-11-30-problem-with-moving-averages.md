@@ -6,8 +6,6 @@ category:
 - FIR Filters
 ---
 
-## Intro
-
 Moving averages are so prolific that even amongst price action traders the only indicator they will use include in their charts. 
 Many other indicators such as MACDs use moving averages and moving averages of differences in moving averages. 
 Even with its extensive usage there is one major draw back which is that of lag. Even thought its commonly known that moving averages lag there is little discussion of how lag is calculated, it's implications and how it can be compensated for. 
@@ -32,7 +30,7 @@ In the case of the 4 SMA the lag is 2 steps. This is much easier to see in visua
 
 ![Moveing averages](/assets/2020-11-30/eur_usd_fir_analysis.png)
 
-The top left chart is the standard SMA you would expect to see in tradeview of meta trader. 
+The top left chart is the standard SMA you would expect to see in tradeview or meta trader. 
 The bottom left chart is the same 256 sma shifted back 128 steps. It's possible to see the moving average is a perfect fit for the data.
 The two right plots are the residuals of the price and the moving average. It can be seen that the bottom right plot is far more stationary which has positive benefits when trading.
 
@@ -42,7 +40,8 @@ There are various zero lag moving averages that try to compensate for this issue
 
 ![Moveing averages](/assets/2020-11-30/unshifted_btc.png)
 
-When the moving averages are shifted it can be seen that the mean reversion of the different moving averages. The main issue is that due to the lag we do not know the current value of the indicator.
+When the moving averages are phase corrected (i.e. shifted) the mean reversion of the different moving averages can be more easily seen.
+The main issue is that due to the lag we do not know the current value of the indicator.
 This is a job for a forecasting model, but the lag gives us the amount time ahead the model is needs to fill in.
 
 ![Moveing averages](/assets/2020-11-30/shifted_btc.png)
@@ -66,5 +65,5 @@ thus
 $$ SMA(4)_{t+4} = 2 * SMA(8)_t - SMA(4)_{t} $$
 
 So there is an explicit relationship between moving averages of different window length but importantly only once they are phase corrected.
-
+This knowledge is useful when trying to implement a trading strategy since we are really trading the future moving average vs the price rather than the current phase corrected version.
  
