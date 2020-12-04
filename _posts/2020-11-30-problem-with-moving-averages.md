@@ -6,7 +6,7 @@ category:
 - FIR Filters
 ---
 
-Moving averages are so prolific that even amongst price action traders the only indicator they will use include in their charts. 
+Moving averages are so prolific that even amongst price action traders, a notoriously anti indicator group often include a single moving average. 
 Many other indicators such as MACDs use moving averages and moving averages of differences in moving averages. 
 Even with its extensive usage there is one major draw back which is that of lag. Even thought its commonly known that moving averages lag there is little discussion of how lag is calculated, it's implications and how it can be compensated for. 
 
