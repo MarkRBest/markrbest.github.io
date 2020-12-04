@@ -8,7 +8,8 @@ category:
 
 Moving averages are so prolific that even price action traders (a notoriously anti indicator group) often include a single moving average. 
 Many other indicators such as MACDs use moving averages and moving averages of differences in moving averages. 
-Even with its extensive usage there is one major draw back which is that of lag. Even thought its commonly known that moving averages lag there is little discussion of how lag is calculated, it's implications and how it can be compensated for. 
+Even with its extensive usage there is one major draw back to moving averages which is they lag the data.
+Even though lag is a commonly known issue there is little discussion of how much lag there is, it's implications and how it can be compensated for. 
 
 There are 3 types of common moving averages used in trading software.
 
