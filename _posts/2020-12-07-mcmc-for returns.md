@@ -83,10 +83,25 @@ The 5% two tail confidence interval for alpha is [1.15570184 1.72671967] which m
 
 ## Follow up
 
-MCMC is really powerful and can be used to estimate complicated models such as:
-* Heston model: $$ dv_t = \theta(\omega - v_t) + \epsilon \sqrt{(v_t)} dB_t $$
+MCMC is really powerful and can be used to estimate complicated stochasitc models such as:
+
+* Heston model: 
+  
+$$ dS_t = \mu S_t dt + \sqrt{v_t}S_tdW^S_t $$
+
+ $$ dv_t = \theta(\omega - v_t) + \xi \sqrt{v_t} dW^v_t $$
+
 * Vasicek model: $$ dr_t = \theta (\mu - r_t) dt + \sigma dW_t $$
-* etc
+* CIR model: $$ dr_t = \theta (\mu - r_t) dt + \sigma \sqrt{r_t} dW_t $$
+* Chen model: 
+
+$$ dr_{t}=\kappa (\theta _{t}-r_{t})\,dt+{\sqrt {r_{t}}}\,{\sqrt {\sigma _{t}}}\,dW_{1} $$
+   
+$$ d\theta _{t}=\nu (\zeta -\theta _{t})\,dt+\alpha \,{\sqrt {\theta _{t}}}\,dW_{2} $$
+
+$$ d \sigma_{t}=\mu (\beta -\sigma _{t})\,dt+\eta \,{\sqrt {\sigma _{t}}}\,dW_{3} $$
+
+
 
 which are hard to estimate via other means.
 
