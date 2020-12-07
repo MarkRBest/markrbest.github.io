@@ -65,7 +65,7 @@ However these numbers are not that useful since we could have just gotten them f
 The interesting information is in the trace distributions. Notice we use burned_trace and not trace, the reason for this is that the first values in the simulation
 are likely to be a long way from the correct values. For this reason the first x samples are often discarded to remove their influence from the final values.
 
-![trace_plot](/assets/2020-12-07/trace-plots.png)
+![trace_plot](/assets/2020-12-07/trace-plot.png)
 
 We can see from the trace plots that the confidence interval from 
 
