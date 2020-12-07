@@ -19,7 +19,7 @@ A simple view of how it works is say you have a model. In the case of the skew n
 ![trace_plot](/assets/2020-12-07/skew_normal.png)
 
 What mcmc practically does is sample from distributions for each of the parameters that are unconditional and user specificed. 
-Then give the difference in the likelihood of the current value, and the new value the new parameters are accepted or rejected.
+Then given the difference in the likelihood of the current value, and the new value the new parameters are accepted or rejected.
 This is done repeatedly in what is known as a chain, and the chain should eventually converge to the correct value of the parameter. 
 What is an added benefit is that the chain can deviate from the optimal value. The range of this deviation can interpreted as a confidence interval.
 Estimating the join probability of something like
@@ -79,7 +79,7 @@ print(np.percentile(burned_trace['alpha'], [2.5,97.5]))
 > [1.15570184 1.72671967]
 {% endhighlight %}
 
-The 5% two tail confidence interval for alpha is [1.15570184 1.72671967] which means we can reject the null hypothesis of alpha == 0.
+The 5% two tail confidence interval for alpha is [1.15570184 1.72671967] which means we can reject the null hypothesis of alpha = 0.
 
 ## Follow up 
 
