@@ -57,14 +57,5 @@ This strategy would have the payoff equivalent to
 
 $$ pnl = SMA(4)_{t+4} - price_t $$
 
-It should also be noted that 
-
-$$ SMA(8)_t = \frac{SMA(4)_{t} + SMA(4)_{t+4}}{2} $$
-
-thus
-
-$$ SMA(4)_{t+4} = 2 * SMA(8)_t - SMA(4)_{t} $$
-
-So there is an explicit relationship between moving averages of different window length but importantly only once they are phase corrected.
-This knowledge is useful when trying to implement a trading strategy since we are really trading the future moving average vs the price rather than the current phase corrected version.
+There is an explicit relationship between moving averages of different window length. This knowledge is useful when trying to implement a trading strategy since we are really trading the future moving average vs the price rather than the current phase corrected version.
  
