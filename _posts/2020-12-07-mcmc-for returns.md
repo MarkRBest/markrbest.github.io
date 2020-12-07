@@ -24,7 +24,7 @@ This is done repeatedly in what is known as a chain, and the chain should eventu
 What is an added benefit is that the chain can deviate from the optimal value. The range of this deviation can interpreted as a confidence interval.
 Estimating the join probability of something like
 
-$$ \wp(\mu, \sigma, \alpha | x) $$
+$$ f(\mu, \sigma, \alpha | x) $$
 
 however the alternative formulation of
 
