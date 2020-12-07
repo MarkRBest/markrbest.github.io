@@ -51,8 +51,9 @@ If golay filters are applied sequentially, and the last estimate of the filter r
 ![golay_issue](/assets/2020-12-05/Savitsky-Golay-filter.png)
 
 The blue line is the estimated mean at time t and the red line is the current value of the golay filter.
-Without some way of estimating some of future data that filter tracks that prices too closely
-and has a much higher volatility compared with the smoothed value.
+Without some way of estimating the future data the filter tends to tracks the most recent prices too closely
+and has a much higher volatility that compared with the smoothed value. If the filter did its job perfectly we would expect the 
+blue line to exactly track the orange line that is only known at a later date.
 
 ## Filter Correction
 

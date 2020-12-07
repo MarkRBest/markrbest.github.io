@@ -6,21 +6,22 @@ category:
 
 ---
 
-Swing points are localised high or low prices. The reason they are useful is that there is a lot of information that can be derived from them.
-Swing point often become support/resistance at a later point in time. Collections of swing points can be used to identify technical patterns such
-as ranges, triangles, flags etc. They can also be used for identifying trends and return distributions. Having an automated technique to identify swing points reliably is quite useful goal.
+Swing points are localised high or low prices in a time series.
+Swing point can be used to estimate optimal stop loss or take profit orders since they often become support/resistance at a later point in time. 
+Collections of swing points can be used to identify technical patterns such as ranges, triangles, flags etc.
+They can also be used for identifying trends and return distributions. Having an automated technique to identify swing points reliably is quite useful goal.
 
 ## Swing Filter
 
-One useful property of [savitsky-golay][wiki-golay] filter is that it fits so closely to the data without needing to be phase corrected.
+One useful property of [savitsky-golay][wiki-golay] filter is that it fits closely to the data without needing to be phase corrected.
 The results of this is that they can be used to identify swing points. If we look at the raw charts of prices with multiple
 levels of smoothing its possible to see that the difference of smoothed values with different window lengths is pretty stationary.
 
 ![golay_issue](/assets/2020-12-06/golay-plot.png)
 
-By adding a threshold for the differences in the two smoothed values its possible to identify peaks.
+By adding a threshold for the differences in the two smoothed values it is possible to identify peaks.
 These peaks in the difference between smoothed values correspond to swing points.
-It's possible to see that in some cases the threshold is crossed multiple times and in these cases I opt to output the most recent of the values.
+It's possible to see that in some cases the threshold is crossed multiple times and in these cases I opt to output the point with the highest deviation.
 
 ![golay_issue](/assets/2020-12-06/diffs.jpg)
 
@@ -55,13 +56,12 @@ print(stats.skewnorm.fit(up_dist))
 
 
 It can be seen in an up leg there is a positive skew and vica versa in a down leg.
-This is nothing that is that incredible but it would be interesting to use the
-information about these unconditional distributions to test
+This information alone is not that useful since if you dont know the current market state then its impossible to know what is likely to happen.
+It would be interesting to use the information about these unconditional distributions to test what the likely state of the market is.
 
 $$ Pr(state | return) $$
 
-I have not looked at predicting market state given returns but this would be a promising
-follow up analysis.
+I have not looked at predicting market state given returns but this would be a promising follow up analysis.
 
 
 [wiki-golay]: https://en.wikipedia.org/wiki/Savitzky%E2%80%93Golay_filter
