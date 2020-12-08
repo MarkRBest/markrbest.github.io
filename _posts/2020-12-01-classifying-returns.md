@@ -11,7 +11,7 @@ I am a big fan of this blog and after reading the post was wondering if the tech
 The idea is to use the labeler offline to generate 3 return classifications, trend up, down and no trend.
 Then by looking at the distributions of returns in each of the classes it should be possible to determine online which of the 3 states we are most likely to be in.
 My hypothesis is that the 3 classes can be modelled as two skew normal distributions for trend up/down and a normal distribution for the neutral market.
-These distributions would be done separately to the training of the transition matrix for the hidden markov model (HMM).
+These distributions would be fitted separately to the training of the transition matrix for the hidden markov model (HMM).
 The then fitted HMM would be ready to be used online with new data it has not seen before... at least that is the plan!
 
 Using the labeler that can be found [here][tr8der-lib]. I applied this labeler to 5 minute BTCUSD closes.
@@ -38,17 +38,17 @@ These distributions are what allows us to use a hidden markov model (HMM) as an 
 
 ## HMM Fitting
 
-As a refresher to how a HMM works. If we assume we have a guassian HMM then each distribution gives us the ability to calculate
-the probability of the observation assuming the state is known.
+As a refresher to how HMMs work, if we assume we have a guassian HMM then each distribution gives us the ability to calculate
+the unconditional probability of the observation assuming the state is known.
 
 $$ Pr(x | S) = \phi(\frac{x-\mu_S}{\sigma_S}) $$
 
 where $$ \phi $$ is a normal pdf.
-What we really want to know is $$ Pr(S_t | x_t) $$ meaning what market are we in given the most recent return? The way an HMM
+What we really want to know is $$ Pr(S_t | x_t) $$ meaning what market state are we in given the most recent return? The way an HMM
 works is to compute $$ Pr(S_t | x, S_{t-1}) $$ by computing or specifically given the previous state of the market and the unconditional probability of the observation
 what is the most likely current state. For more information about HMMs i can recommend the book [Hidden Markov Models for Time Series: An Introduction Using R][hmm-book].
 
-Fitting distributions is easy in python and the code for this can be found below. I have assumed the up and down distributions are skew normal rather than a sysmetric distribution.
+Fitting distributions is easy in python and the code for this can be found below. I have assumed the up and down distributions are skew normal and the sideways distribution is normal.
 I did not test the AIC or BIC of the fit but i have enough confidence from visual inspection alone that this is better than using a normal distribution for all states.
 
 {% highlight python %}
@@ -69,13 +69,14 @@ Using the [hmm learn][hmmlearn-lib] library this is easy to do even if the emiss
 By overriding the HMM base class to be able to calculate the log likelihood for the various different distributions allows the data to be easily fit.
 
 {% highlight python %}
+from scipy.stats import skewnorm, norm
 from hmmlearn.base import _BaseHMM
 
 class CustomSkewHMM(_BaseHMM):
     def __init__(self, params, **kwargs) :
         self.dists = [
-            skewnorm(params[0]), params[1], params[2]),
-            norm(0, np.abs(params[3])),
+            skewnorm(params[0], params[1], params[2]),
+            norm(0, params[3]),
             skewnorm(params[4], params[5], params[6]),
         ]
 
@@ -118,7 +119,8 @@ confusion_matrix(is_df["label"][1:], is_df["label"][:-1])
  [  98   88 2447]]
 {% endhighlight %}
 
-What is also interesting from the fit is that is suggests that we are more likely to go from a down market to an up market compared to a sideways market.
+What is also interesting from the fit is that it suggests the market is more likely to go from a
+down market to an up market compared to a sideways market.
 We are also 3 times more likely to go from an upmarket to a sideways market.
 
 # Online classification
@@ -158,7 +160,7 @@ weighted avg       0.38      0.37      0.31      2000
 {% endhighlight %}
 
 I can only presume the reason for this is the that the estimated parameters for the unconditional distributions are not stable.
-It would seem that the state persistence is stable through time however the only reason I would suspect the reason the out of sample performance is not great is if
+It would seem that the state persistence is stable through time however the main reason I suspect for out of sample performance being bad is if
 the parameters for the unconditional models differ by a lot. This needs more investigating.
 
 [tr8der-labelling]: https://tr8dr.github.io/labeling/
