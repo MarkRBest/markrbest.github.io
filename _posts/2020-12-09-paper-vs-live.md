@@ -69,7 +69,8 @@ $$ pnl_{sim} = \alpha dt + \sigma dW^{sim} $$
 
 $$ pnl_{prod} = \alpha dt + \sigma dW^{prod} $$
 
-It is easy in simulation to test the null hypothesis $$\alpha = 0 $$ what we would like to know is if $$ alpha_{sim} = alpha_{prod} $$ since if $$ alpha_{sim} = alpha_{prod}  \land  alpha_{sim} > 0 \implies alpha_{prod} > 0 $$.
+It is easy in simulation to test the null hypothesis $$\alpha = 0 $$ what we would like to know is
+if $$ alpha_{sim} = alpha_{prod} $$ since if $$ alpha_{sim} = alpha_{prod} $$ and $$ alpha_{sim} > 0 \implies alpha_{prod} > 0 $$.
 If the execution is the same between simulation and production then this should be the case. At that point the only concern is the time stability of alpha.
 What is mean but this is to make sure that just because we have historically made money doesnt mean that we will make money in the future.
 This is a different topic that many books ([deprado][deprado], [masters][masters-book]) have been written about and something i plan to post more about at a later date.
