@@ -45,6 +45,11 @@ There a couple of reasons for this.
       that the data in two feeds is different.
     * We could record the market data on the live machine and use this at a later date with simulation. The main reason I don't do this is that I don't want to overload production trading with having to also do a massive amount if IO.
 
+* Problem 3
+    * Live and paper are heavily multi-threaded whereas sim is single threaded. In the initial runs there were issues with race conditions leading to paper trading different to live.
+    * Using locks ensures the discrete decision set between sim and paper are the same irrespective of the environment.
+
+
 I should note my aim is not to get a perfect simulator as this task takes a lot of effort and
 I would like to focus on strategy optimisation as much as possible given time constraints.
 Also it should be noted the main reason for choosing to focus on trading medium frequency strategies
@@ -82,7 +87,7 @@ This is a different topic that many books ([deprado][deprado], [masters][masters
 | Sim | 23 | 3726 | $18218.10 | 28 | 4115  | $18202.61 |
 | Live | 23 | 3726 | $18220.39 | 28 | 4115  | $18204.24 |
 | :--------| :-------------: | :---- | : ---- |
-|  |  | $ 2.29 | | $-1.63    |
+|  | | | $ 2.29 | | | $-1.63    |
 
 The volume weighted slippage is around 0.000557 % which is a lot lower than I was expecting and is actually even positive.
 
