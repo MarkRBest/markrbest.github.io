@@ -90,6 +90,10 @@ Positive slippage means that live out performed paper. This is not that surprisi
 In reality, orders can be filled at a better price in wider market by being aggressed without the bid offer price changing.
 The current implementation is designed to be fast and simple. I mainly wanted to make sure slippage was no worse than the BYBIT rebate of 0.025% and definitely no worse than simulation profit per trade of 0.1%
 
+Given the current data set it looks like the per trade profitability of 0.08867% is about what simulation predicted at 0.1%.
+To truly validate the strategy, it still needs to trade for longer and also during times of serious market stress.
+That aside the current results are promising and good enough to warrant continued live testing.
+
 ## Note
 
 In my opinion it's better to go live with a model as soon as possible. It is easy to spend a huge amount of time perfecting a model in sim, adding parameters and finding solutions to edge conditions only to find
