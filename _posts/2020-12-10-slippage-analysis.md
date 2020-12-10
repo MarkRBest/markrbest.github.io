@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Slippage Analysis - Part 2"
+title:  Slippage Analysis - Part 2
 category:
 - Algo Trading
 
