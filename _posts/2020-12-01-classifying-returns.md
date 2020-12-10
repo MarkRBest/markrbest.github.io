@@ -52,7 +52,7 @@ Fitting distributions is easy in python and the code for this can be found below
 I did not test the AIC or BIC of the fit but i have enough confidence from visual inspection alone that this is better than using a normal distribution for all states.
 
 {% highlight python %}
-df["ret"] = np.log(df.price.shift(-1) / df.price)
+df["ret"] = np.log(df.price / df.price.shift(+1))
 up_dist = skewnorm.fit(is_df[is_df["label"] == +1]["ret"])
 neutral_dist = norm.fit(is_df[is_df["label"] == 0]["ret"])
 dn_dist = skewnorm.fit(is_df[is_df["label"] == -1]["ret"])
