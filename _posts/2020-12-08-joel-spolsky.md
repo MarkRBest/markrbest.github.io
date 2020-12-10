@@ -6,7 +6,7 @@ category:
 
 ---
 
-Joel Spolksy is a computer scientist and blogger who wrote many books about software and software development.
+Joel Spolksy is a computer scientist and blogger who wrote many books about programming and software development.
 Some of his observation about programming are timeless, and his books are worth a read.
 The writing style is light and enjoyable making his articles both educational as well as easy to read.
 His blog [joel on software][joel-on-software] was also compiled into a series of [books][jo-books].
