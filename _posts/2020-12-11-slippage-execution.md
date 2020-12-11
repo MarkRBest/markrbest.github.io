@@ -153,4 +153,4 @@ The limit order book plot is really useful to understand the actions of the stra
 Next Steps
 
  * Understand what is going on with the paper fills
- * Collect more live trade data to confirm the effect of thecode fix.
+ * Collect more live trade data to confirm the effect of the code fix.
