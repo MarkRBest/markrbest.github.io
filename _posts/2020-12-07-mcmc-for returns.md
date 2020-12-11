@@ -40,7 +40,7 @@ This is the code for fitting a skew normal distribution to our return data using
 {% highlight python %}
 import pymc3 as pm
 
-with pm.Model() as our_first_model:
+with pm.Model() as model:
     mu = pm.Normal("mu", mu=0, tau=1)
     alpha = pm.HalfNormal('alpha', sigma=1.)
     sigma = pm.Beta('sigma', alpha=1., beta=3.)
