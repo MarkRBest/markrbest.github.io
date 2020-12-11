@@ -5,40 +5,35 @@ category:
 - MCMC
 ---
 
-How do you know if a return distribution is skewed or not?
-The empiricist method is to fit the data to a normal distribution and a skew normal distribution and to compare the AIC or BIC of each fit.
+How do you know if a return distribution is skewed?
+The empiricist method is to fit the data to a normal and skew normal distribution and to compare the AIC or BIC of each fit.
 I would like to present an alternative that is more powerful and is also useful for giving confidence intervals to estimate the quality of fit of each parameter.
 This is especially useful for computing correlation matrices since most techniques only give point estimations and not parameter distributions.
 
-Markov chain monte carlo (MCMC) is an alternative method for estimating parameters for complex model and often gives better interpretability
+Markov chain monte carlo (MCMC) is an alternative method for estimating model parameters and often gives better interpretability
 compared with methods that rely specifically on maximum likelihood estimation (MLE) or maximum a posteriori (MAP) estimation.
-The other great thing is that libraries such as pymc3 make MCMC far simpler than using BUGS and other Gibbs samplers.
+Libraries such as pymc3 make it simple to do MCMC in python.
 
-In the case of the skew normal its 3 parameters, mu, sigma and alpha.
+In the case of the skew normal its 3 parameters, $$ \mu $$, $$ \sigma $$ and $$ \alpha $$
 
-![trace_plot](/assets/2020-12-07/skew_normal.png)
+$$ f(x | \mu, \sigma, \alpha) = 2\Phi ((x-\mu) \sqrt{\tau} \alpha) \phi(x,\mu, \tau) $$
 
 What mcmc practically does is sample from distributions for each of the parameters that are unconditional and user specified.
-Then given the difference in the likelihood of the current value, and the new value, the new parameters are either accepted or rejected with a probability proportional to its change in the likelihood.
+Then given the difference in the likelihood of the current value, and the new value, the new parameters are either accepted or
+rejected with a probability proportional to its improvement in the likelihood.
 This is done repeatedly in what is known as a chain. The chain should eventually converge to the correct value of the parameter.
 What is an added benefit is that the chain can deviate from the optimal value. The range of this deviation can interpreted as a confidence interval.
-What we would really like to know is the parameter distribution however estimating the join probability of these from the data is difficult.
-
-$$ f(\mu, \sigma, \alpha | x) $$
-
-however the alternative
-
-$$ f(x | \mu, \sigma, \alpha) $$
-
-is simple to estimate and simulate via standard distributions in this case via a skew normal distribution.
+What we would really like to know is the parameter distribution however estimating the join probability $$ f(\mu, \sigma, \alpha | x) $$ from the data is difficult,
+however the alternative $$ f(x | \mu, \sigma, \alpha) $$ is simple to estimate and simulate via standard distributions in this case via a skew normal distribution.
 The only thing needed to be decided is what unconditional distribution the parameters might take. In the case of the skew normal
 
 $$ \mu \in \mathbb{R} $$
 
 $$ \sigma, \alpha \in \mathbb{R}_{>0} $$
 
-We estimate $$\mu$$ to follow a standard normal distribution, $$\sigma$$ to follow a beta distribution which ensures its positiveness and limits it within [0-1]
-and $$\alpha$$ to follow a half normal distribution since its positive.
+$$\mu$$ is estimated to follow a standard normal distribution, $$\sigma$$ follows a beta distribution which ensures its positiveness
+and $$\alpha$$ follows a half normal distribution since its also positive but not bound below one. The goal is to choose a distribution that has a lot of the
+density around the correct parameter value this can be done via a trial and error or other empirical approaches can be taken for a starting guess.
 
 This is the code for fitting a skew normal distribution to our return data using pymc3.
 
@@ -67,7 +62,7 @@ are likely to be a long way from the correct values. For this reason the first x
 
 ![trace_plot](/assets/2020-12-07/trace-plot.png)
 
-We can see from the trace plots that the confidence interval from
+We can see the confidence interval from the trace plots.
 
 {% highlight python %}
 import numpy as np
@@ -85,18 +80,18 @@ The 5% two tail confidence interval for alpha is [1.15570184 1.72671967] which m
 
 MCMC is really powerful and can be used to estimate complicated stochasitc models such as:
 
-* Heston model: 
-  
+* Heston model:
+
 $$ dS_t = \mu S_t dt + \sqrt{v_t}S_tdW^S_t $$
 
  $$ dv_t = \theta(\omega - v_t) + \xi \sqrt{v_t} dW^v_t $$
 
 * Vasicek model: $$ dr_t = \theta (\mu - r_t) dt + \sigma dW_t $$
 * CIR model: $$ dr_t = \theta (\mu - r_t) dt + \sigma \sqrt{r_t} dW_t $$
-* Chen model: 
+* Chen model:
 
 $$ dr_{t}=\kappa (\theta _{t}-r_{t})\,dt+{\sqrt {r_{t}}}\,{\sqrt {\sigma _{t}}}\,dW_{1} $$
-   
+
 $$ d\theta _{t}=\nu (\zeta -\theta _{t})\,dt+\alpha \,{\sqrt {\theta _{t}}}\,dW_{2} $$
 
 $$ d \sigma_{t}=\mu (\beta -\sigma _{t})\,dt+\eta \,{\sqrt {\sigma _{t}}}\,dW_{3} $$
