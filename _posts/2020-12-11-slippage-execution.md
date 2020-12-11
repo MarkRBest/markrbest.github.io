@@ -150,7 +150,7 @@ The live execution makes sense because the market never ticked down until around
 It however looks like the paper buy order was placed at an off market price which is why it was filled without the market moving.
 The limit order book plot is really useful to understand the actions of the strategy and to investigate any executions of interest.
 
-Next Steps
+## Next Steps
 
  * Understand what is going on with the paper fills
  * Collect more live trade data to confirm the effect of the code fix.
