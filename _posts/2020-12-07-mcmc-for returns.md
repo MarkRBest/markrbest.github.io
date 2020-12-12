@@ -6,7 +6,7 @@ category:
 ---
 
 How do you know if a return distribution is skewed?
-The empiricist method is to fit the data to a normal and skew normal distribution and to compare the AIC or BIC of each fit.
+The empiricist method is to fit the data to a normal and skew-normal distribution and to compare the AIC or BIC of each fit.
 I would like to present an alternative that is more powerful and is also useful for giving confidence intervals to estimate the quality of fit of each parameter.
 This is especially useful for computing correlation matrices since most techniques only give point estimations and not parameter distributions.
 
@@ -18,24 +18,24 @@ In the case of the skew normal its 3 parameters, $$ \mu $$, $$ \sigma $$ and $$ 
 
 $$ f(x | \mu, \sigma, \alpha) = 2\Phi ((x-\mu) \sqrt{\tau} \alpha) \phi(x,\mu, \tau) $$
 
-What mcmc practically does is sample from distributions for each of the parameters that are unconditional and user specified.
+What mcmc practically does is sample from distributions for each of the parameters that are unconditional and user-specified.
 Then given the difference in the likelihood of the current value, and the new value, the new parameters are either accepted or
 rejected with a probability proportional to its improvement in the likelihood.
 This is done repeatedly in what is known as a chain. The chain should eventually converge to the correct value of the parameter.
-What is an added benefit is that the chain can deviate from the optimal value. The range of this deviation can interpreted as a confidence interval.
-What we would really like to know is the parameter distribution however estimating the join probability $$ f(\mu, \sigma, \alpha | x) $$ from the data is difficult,
-however the alternative $$ f(x | \mu, \sigma, \alpha) $$ is simple to estimate and simulate via standard distributions in this case via a skew normal distribution.
-The only thing needed to be decided is what unconditional distribution the parameters might take. In the case of the skew normal
+What is an added benefit is that the chain can deviate from the optimal value. The range of this deviation can be interpreted as a confidence interval.
+What we would like to know is the parameter distribution however estimating the join probability $$ f(\mu, \sigma, \alpha | x) $$ from the data is difficult,
+however the alternative $$ f(x | \mu, \sigma, \alpha) $$ is simple to estimate and simulate via standard distributions in this case via a skew-normal distribution.
+The only thing needed to be decided is what unconditional distribution the parameters might take. In the case of the skew-normal
 
 $$ \mu \in \mathbb{R} $$
 
 $$ \sigma, \alpha \in \mathbb{R}_{>0} $$
 
 $$\mu$$ is estimated to follow a standard normal distribution, $$\sigma$$ follows a beta distribution which ensures its positiveness
-and $$\alpha$$ follows a half normal distribution since its also positive but not bound below one. The goal is to choose a distribution that has a lot of the
+and $$\alpha$$ follows a half-normal distribution since its also positive but not bound below one. The goal is to choose a distribution that has a lot of the
 density around the correct parameter value this can be done via a trial and error or other empirical approaches can be taken for a starting guess.
 
-This is the code for fitting a skew normal distribution to our return data using pymc3.
+This is the code for fitting a skew-normal distribution to our return data using pymc3.
 
 {% highlight python %}
 import pymc3 as pm
@@ -56,9 +56,9 @@ The results from running this code on our bitcoin up leg return distributions ar
 * $$\sigma$$: +0.00325
 * $$\alpha$$: +1.44022
 
-However these numbers are not that useful since we could have just gotten them from scipy.stats.skewnormal.fit(data).
+However, these numbers are not that useful since we could have just gotten them from scipy.stats.skew-normal.fit(data).
 The interesting information is in the trace distributions. Notice we use burned_trace and not trace, the reason for this is that the first values in the monte carlo simulation
-are likely to be a long way from the correct values. For this reason the first x samples are often discarded to remove their influence from the final values.
+are likely to be a long way from the correct values. For this reason, the first x samples are often discarded to remove their influence from the final values.
 
 ![trace_plot](/assets/2020-12-07/trace-plot.png)
 
@@ -74,7 +74,7 @@ print(np.percentile(burned_trace['alpha'], [2.5,97.5]))
 > [1.15570184 1.72671967]
 {% endhighlight %}
 
-The 5% two tail confidence interval for alpha is [1.15570184 1.72671967] which means we can reject the null hypothesis of H0: $$\alpha$$ = 0.
+The 5% two-tail confidence interval for alpha is [1.15570184 1.72671967] which means we can reject the null hypothesis of H0: $$\alpha$$ = 0.
 
 ## Follow up
 

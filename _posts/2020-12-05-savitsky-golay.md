@@ -18,11 +18,11 @@ smoothed = savgol_filter(x, window_length=127, polyorder=3, deriv=0)
 
 ![golay_issue](/assets/2020-12-05/golay-plot.png)
 
-The plots show that the smoothed value is zero lag meaning it fits the data without needing to be phase corrected (i.e. shifted).
+The plots show that the smoothed value is zero lag meaning it fits the data without needing to be phase-corrected (i.e. shifted).
 
 ## Filter coefficients
 
-One other good thing about the savitsky-golay filter is that it can be implemented as an fixed impulse response FIR
+One other good thing about the Savitsky-Golay filter is that it can be implemented as a fixed impulse response FIR
 either as a dot product or a convolution. The knowledge of this means that its also easy to implement mean reversion
 strategies between the price and the smoothed value.
 
@@ -33,26 +33,26 @@ coeffs = savgol_coeffs(32, polyorder=3, deriv=0, use="dot")
 
 ![golay_issue](/assets/2020-12-05/golay-weights.png)
 
-Plot of filter coefficients for different derivatives.
+The plot of filter coefficients for different derivatives.
 
 ## Issues
 
-The main issue with savitsky golay filtering is one that plagues zero lag style filters.
-Estimates for recent observations changes as new data becomes available. In case of the scipy golay filter
+The main issue with Savitsky Golay filtering is one that plagues zero lag style filters.
+Estimates for recent observations changes as new data becomes available. In case of the scipy Golay filter
 implementation there are various techniques to try to estimate future data to fit the filter to.
 These include:
   * constant
   * last value
   * interpolate
 
-For any practical forecasting applications these are all useless and give a value that over weights the most recent observtion.
-If golay filters are applied sequentially, and the last estimate of the filter recorded it's easy to visualise this problem.
+For any practical forecasting applications, these are all useless and give a value that overweights the most recent observation.
+If Golay filters are applied sequentially, and the last estimate of the filter recorded it's easy to visualise this problem.
 
 ![golay_issue](/assets/2020-12-05/Savitsky-Golay-filter.png)
 
-The blue line is the estimated mean at time t and the red line is the current value of the golay filter.
-Without some way of estimating the future data the filter tends to tracks the most recent prices too closely
-and has a much higher volatility that compared with the smoothed value. If the filter did its job perfectly we would expect the 
+The blue line is the estimated mean at time t and the red line is the current value of the Golay filter.
+Without some way of estimating the future data, the filter tends to tracks the most recent prices too closely
+and has much higher volatility that compared with the smoothed value. If the filter did its job perfectly we would expect the 
 blue line to exactly track the orange line that is only known at a later date.
 
 ## Filter Correction
