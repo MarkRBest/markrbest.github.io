@@ -8,7 +8,7 @@ category:
 
 I find bitcoin market microstructure very interesting since it is so different to any market I have looked at.
 I come from a fixed income HFT background, and a lot of the instruments I have previously traded tend to be deep markets.
-The ZN contract on CME normally has about 5000 contracts of 100k USD value per contract each price level.
+The 10Y UST T-Note future (ZN) contract on CME-Globex normally has about 5000 contracts of 100k USD value per contract each price level.
 Moving the price even a few ticks in one go requires very deep pockets.
 Bitcoin, however, has a very different microstructure in that the touch prices are very deep 2-4 million USD but there is almost no liquidity
 at any of the other levels.
