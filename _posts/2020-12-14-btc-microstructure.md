@@ -44,7 +44,7 @@ I don't have first-hand experience using FPGAs so don't exactly how fast they ar
 
 > FPGA chips have very specific technical characteristics that enable them to execute certain types of trading algorithms up to 1000 times faster than traditional software solutions.
 
-This would suggest and FPGA can work around single-digit nanoseconds.
+This would suggest an FPGA can achieve latencies measured in single-digit nanoseconds.
 
 My suspicion there are other arbitrages which require passive fills to be profitable due to the fee strucutre.
 Conditionally on being filled on one exchange then its highly likely the trade can be completed profitably elsewhere.
