@@ -46,6 +46,6 @@ I don't have first-hand experience using FPGAs so don't exactly how fast they ar
 
 This would suggest and FPGA can work around single-digit nanoseconds.
 
-My suspicion in cryptos is that there are other arbitrages which require passive fills to be profitable.
+My suspicion there are other arbitrages which require passive fills to be profitable due to the fee strucutre.
 Conditionally on being filled on one exchange then its highly likely the trade can be completed profitably elsewhere.
 This is the only reason I can think of that explains this micro-structure behaviour.

@@ -51,7 +51,7 @@ slippage  -0.0138 %
 The slippage numbers are now within my original expectations (I thought it would be about the BYBIT rebate of 25 bps).
 Likely the true slippage is higher in volatile markets but I have much more confidence now the live platform is working as expected.
 
-# LOB plots
+## Limit Order Book Plots
 
 Looking at the limit order book of paper and production fills they now line up closely.
 
