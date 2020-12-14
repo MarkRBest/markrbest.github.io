@@ -9,8 +9,8 @@ category:
 The slippage saga is thankfully coming to an end.
 Even after all my best efforts, it seems that the issue was related to something I had not foreseen.
 The experience has helped confirm the use of this blog as a [cardboard chewbacca](/joel-spolsky/).
-During research about hidden size on BYBIT and book cleaning, I was reading the API change logs and notice that the
-open-api was in the process of being deprecated and it had moved to a new set of endpoints.
+During research about hidden size on BYBIT and book cleaning, I was reading the API change logs and noticed that the
+open-api was in the process of being deprecated.
 I didn't think too much of it other than the need to upgrade due to the old endpoints being decommissioned.
 
 Then I looked at the results...
@@ -23,11 +23,14 @@ These were the latency results using the open api from a machine with 7 ms ping 
 The average trade latency was 180 ms but there were very long tails. One order took 7 seconds which is not on the
 chart since it was such a massive outlier, it made seeing the core of the distribution difficult.
 
-![v2](/assets/2020-12-12/v2-box-plot.png)
+![v2](/assets/2020-12-12/insert-modify-latency.png)
 
 This code uses the v2 api and modifies orders rather than cancel replacing them (hence no cancellation latency).
 Using the new api has made a massive difference not only to the average exchange response time but to the tails of the latency distribution.
-The mean insert latency is now 16 ms, but the worst case was only 40 ms.
+The mean insert latency is now 16 ms, but the worst case was only 40 ms. The other benefit of using modify orders is that its latency is lower 
+than using an cancel insert. The modify latency distribution has a longer upper tail however the need for modifies is 
+conditional on the market moving. So every order has an insert but only order in markets moving against the order 
+require modifies. Thus it is not surprising the tail of the modify distribution to be higher. 
 
 ## Slippage Results
 
