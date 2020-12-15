@@ -25,10 +25,11 @@ It seems like the first bar of the day is also quite volatile which I can only a
 
 # Financial Market Comparison
 
+##### USDJPY
 ![usdjpy](/assets/2020-12-15/usdjpy-rv-hour.png)
-
+##### WTI
 ![wti](/assets/2020-12-15/wti-rv-hour.png)
-
+##### XAU
 ![xau](/assets/2020-12-15/xau-rv-hour.png)
 
 Non-crypto financial assets show a strong relationship between time of day and volatilty.
