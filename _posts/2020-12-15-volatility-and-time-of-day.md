@@ -5,7 +5,7 @@ category:
 - Volatility
 ---
 
-Given transaction costs are non-zero and funding rates are around 10 bps per 8 hours (depending on the exchange) it is
+Given transaction costs are non-zero and funding rates are around 1 bps per 8 hours (depending on the exchange) it is
 a good idea to trade around times when the market is busy. I have done this analysis on other markets but have not applied it to cryptos.
 I was interested to know if volatility tends to cluster around certain days or hours. Before doing the analysis I had a suspicion that there tended to be
 a lot of activity over the weekend and also during Asian hours.
