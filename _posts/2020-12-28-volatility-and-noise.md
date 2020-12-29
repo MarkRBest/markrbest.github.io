@@ -38,7 +38,8 @@ This post aims to talk about estimating market noise and trying to classify the 
 
 # Bayesian Market Making
 
-This paper about [Bayesian Market-Making](/assets/2020-12-28/bmm-ec.pdf) and [Optimal Sequential Market-Making](/assets/2020-12-28/opt-mm-nips.pdf) covers the same topic.
+The papers about [Bayesian Market-Making](/assets/2020-12-28/bmm-ec.pdf) and
+[Optimal Sequential Market-Making](/assets/2020-12-28/opt-mm-nips.pdf) cover the same topic.
 
 The paper was interesting to me since it is a form of reinforcement learning. The proposition is that market making is an
 exploratory as well as exploitatory problem. The goal is to estimate the correct fair price as quickly as possible and to then
