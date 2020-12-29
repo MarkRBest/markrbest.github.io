@@ -31,7 +31,7 @@ from scipy.signal import savgol_coeffs
 coeffs = savgol_coeffs(32, polyorder=3, deriv=0, use="dot")
 {% endhighlight %}
 
-![golay_issue](/assets/2020-12-05/golay-weights.png)
+![golay_issue2](/assets/2020-12-05/golay-weights.png)
 
 The plot of filter coefficients for different derivatives.
 
@@ -48,7 +48,7 @@ These include:
 For any practical forecasting applications, these are all useless and give a value that overweights the most recent observation.
 If Golay filters are applied sequentially, and the last estimate of the filter recorded it's easy to visualise this problem.
 
-![golay_issue](/assets/2020-12-05/Savitsky-Golay-filter.png)
+![golay_issue3](/assets/2020-12-05/Savitsky-Golay-filter.png)
 
 The blue line is the estimated mean at time t and the red line is the current value of the Golay filter.
 Without some way of estimating the future data, the filter tends to tracks the most recent prices too closely
