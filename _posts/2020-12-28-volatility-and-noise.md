@@ -64,7 +64,7 @@ To update the statement from the first paragraph
 Likely in the application, this should use a smooth transition between states rather than a single cut off value. It is shown by simulation that
 the relationship between profits and $$ \rho $$ is non-linear and pnl decrease significantly beyond a $$ \rho$$ value of 2.5.
 
-## Application to Trading
+## Trading Application
 
 The strategy I am running a mean reversion strategy on cryptos that is in essence a market marker.
 It estimates a mid-price and then positions itself with the expectation that the future mean price is likely to be the forecasting average price.
