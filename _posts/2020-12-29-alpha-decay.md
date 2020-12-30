@@ -51,13 +51,13 @@ import matplotlib.pyplot as plt
 
 alpha_df = pd.DataFrame()
 trade_times = trade_df.index
-start_price = list(price_df.price)
+trade_price = list(trade_df.price)
 for offset in [5, 10, 15, 30, 60, 120, 240]:
     # calculate future price
     fut_price = price_df.price.asof(trade_times + timedelta(minutes=offset))
 
     # calculate returns
-    returns = 100*np.log(np.divide(fut_price, start_price))
+    returns = 100*np.log(np.divide(fut_price, trade_price))
     returns *= list(np.sign(trade_df.fill_qty)) # change return sign for long/short
 
     # build results dataframe
