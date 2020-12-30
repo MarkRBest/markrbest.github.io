@@ -16,7 +16,7 @@ The then fitted HMM would be ready to be used online with new data it has not se
 
 Using the labeler that can be found [here][tr8der-lib]. I applied this labeller to 5 minute BTCUSD closes.
 
-![Moveing averages](/assets/2020-12-01/labeled_prices.png)
+![Moving averages](/assets/2020-12-01/labeled_prices.png)
 
 The parameters for the labeller are 100 basis points and 10 inactive bars.
 
@@ -31,7 +31,7 @@ We can see from the plot the labeller does a good job of identifying areas where
 The second interesting observation is that there is a lot of auto-correlation between the states. It is the stickiness of these states which is what we will be trying to make money from.
 If it is possible to successfully identify the market state then the assumptions are that the market is more likely to stay in that state.
 
-![Moveing averages](/assets/2020-12-01/return_dist.png)
+![return-dist](/assets/2020-12-01/return_dist.png)
 
 An offline labeller is only so useful in the real world. What we want is something that can tell us real-time what type of market we are in.
 These distributions are what allows us to use a hidden markov model (HMM) as an online labeller.
