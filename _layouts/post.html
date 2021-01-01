@@ -8,7 +8,6 @@ layout: default
   <h2>{{ page.subtitle }}</h2>
   <div class="date">Posted {{ page.date | date: "%B %e, %Y" }}</div>
 
-
   <div class="entry">
     {{ content }}
   </div>
@@ -18,7 +17,7 @@ layout: default
       Because this blog is new, I would appreciate some feedback to know what to improve.
       If you have any thoughts on different topics, sections that need expanding or are simply confusing please feel free to say.
       Comments and feedback would be much appreciated and will help this blog to improve going forward.
-    </h3> <br/>
+    </h3>
 
   {% include disqus.html disqus_identifier=page.disqus_identifier %}
 </article>
