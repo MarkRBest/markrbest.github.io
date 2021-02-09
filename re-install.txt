@@ -1,0 +1,24 @@
+cd ../markrbest.github.io/
+
+gem install jekyll bundler
+
+sudo  apt  install ruby ruby-dev
+sudo  apt  install jekyll
+
+gem install jekyll bundler
+
+
+## create gem file
+
+cd git/site
+
+bundle init
+
+add
+
+gem "jekyll", "~> 4.0"
+
+to Gem file
+
+
+bundle exec jekyll serve
