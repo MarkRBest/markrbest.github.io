@@ -39,7 +39,7 @@ The Signature of a time series is a universal description for a stream of data d
 ### Code
 
 The following [github code](https://github.com/SigCGANs/Conditional-Sig-Wasserstein-GANs) is an implementation of this
-[paper](assets/2021-02-18/Enriching_Financial_Datasets_with_Generative_Adversarial_Networks.pdf).
+[paper](assets/2021-03-22/Enriching_Financial_Datasets_with_Generative_Adversarial_Networks.pdf).
 The code is an implementation of a time series signature GAN for modelling multivariate time-series.
 The discriminator uses the signature of the training set to determine if the generated time series is realistic.
 
