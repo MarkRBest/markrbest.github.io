@@ -32,7 +32,7 @@ It is just that it can take a much longer time to write the same amount of busin
 
 Rust is touted as a C++ killer which put me off looking at it for a long time since I think this does it a disservice.
 Many languages have claimed this, and it is inevitably unlikely to be true. Say what you like about C++ but there is a reason that it has stood the test of time.
-Someone I worked with said ```C++ is your best friend and your worst enemy``` and I think this is a good summary of using it.
+Someone I worked with said ```"C++ is your best friend and your worst enemy"``` and I think this is a good summary of using it.
 That said, I think that alternative languages can carve out niches and that is how I feel about Rust and HFT.
 I have been hearing more and more about Rust from different sources, that it warranted a deeper dive. What I found I am very impressed with.
 
@@ -52,7 +52,7 @@ The main advantage in my opinion specifically to HFT is:
 - String functionality makes working with json and string parsing almost as easy as python.
 - It is designed with unit testing in mind and this is easy to do with Cargo.
 
-The main two advantages in my mind are lack of run time and what Rust calls ```fearless concurrency ```
+The main two advantages in my mind are lack of run time and what Rust calls ```"fearless concurrency" ```
 The reason some languages have a run time is partly portability and partly for garbage collection. Rust solves both the issues relating to memory management and concurrency using the same idea.
 The way Rust does this is using the concept of ownership and borrowing. When an object is passed to a function it is moved, and the ownership transferred. The ownership then controls the lifetime of the objects and the responsibility for de-allocation.
 This is a big pain in other languages since there have to be strict rules about if memory is allocated within a function or outside and who is responsible for de-allocation. This is easy to mess up and is problematic when using libraries that have different conventions.
