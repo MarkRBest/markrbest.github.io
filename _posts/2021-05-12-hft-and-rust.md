@@ -81,7 +81,7 @@ multi producer single consumer (mpsc) and multi producer multi-consumer (mpmc). 
 
 n.b. this won't compile so it just an example.
 
-```Rust
+```rust
 
 pub enum Side { Bid, Ask }
 
