@@ -33,7 +33,7 @@ Since there is a limited amount of margin on each exchange at any one time this 
 I hypothesise that due to liquidations and issues with margin, prices become overly elastic and move on relatively low volume imbalances.
 An amount of volume which would normally move the market 1k could thus push the market 10k.
 
-## The indicator
+## The Indicator
 
 To measure order flow imbalance I use an event time indicator like Tr8dr's BSI indicator described [here](https://tr8dr.github.io/BuySellImbalance/).
 The indicator is the decaying cumulative sum of the signed volume. The labelling of the trades is something for debate.
@@ -95,7 +95,7 @@ During the whole day, the elasticity of the market was increasing meaning the am
 
 ## Conclusion
 
-there is more formal analysis to do relating to a dynamic relationship between liquidity and volatility. That was not the aim of this post.
+There is more formal analysis to do relating to a dynamic relationship between liquidity and volatility. That was not the aim of this post.
 I mainly wanted to show how significant the change in the markets' ability to clear volume imbalances became on May 19th.
 
 It would be better if I could include data from the whole aggregate market but at the moment I only have clean data for one exchange.
