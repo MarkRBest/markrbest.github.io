@@ -132,9 +132,9 @@ means this latency target is possible while still being able to log from the str
 the closures is that it doesn't require any string or memory operations so there is also almost no impact in the 99% tail of the latency distribution.
 If we examine the latency distribution of each of these implementations this is easy to see. The closure version is much better behaved.
 
-![basic-latency](/assets/2022-10-22/basic-latency.png)
-![print-string-latency](/assets/2022-10-22/print-string-latency.png)
-![closure-latency](/assets/2022-10-22/closure-latency.png)
+![basic-latency](/assets/2022-10-23/basic-latency.png)
+![print-string-latency](/assets/2022-10-23/print-string-latency.png)
+![closure-latency](/assets/2022-10-23/closure-latency.png)
 
 When looking at the graphs the real improvement with regard to using serialised closures can be seen.
 Not only is the closure method faster on average but its latency distribution is much more predictable.
