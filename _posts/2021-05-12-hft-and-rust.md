@@ -4,7 +4,7 @@ title:  The Rust Programming Language
 category:
 - HFT
 - Programming
-
+- Rust
 ---
 
 I love programming! There is something really satisfying about solving a complicated problem concisely.
