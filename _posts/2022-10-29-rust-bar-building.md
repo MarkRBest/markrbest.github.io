@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Building candlesticks in Rust
+title:  Building Candlesticks in Rust
 category:
 - Programming
 - Deprado
@@ -50,7 +50,7 @@ There a couple of extra variables of importance compared with OHLCV bars.
 Volume should be signed since there is information in the imbalance between buys and sells.
 Also volume weighted average price (vwap) can be tracked over the period since close-vwap contains information about momentum/commitment.
 
-# Time Bars
+### Time Bars
 
 define the BarBuilder trait ( i.e. interface).
 ```rust
@@ -121,7 +121,7 @@ impl BarBuilder for TimeBarBuilder {
 
 ```
 
-# Volume bars
+### Volume bars
 
 Define VolumeBarBuilder class
 
