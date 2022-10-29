@@ -52,7 +52,7 @@ Also volume weighted average price (vwap) can be tracked over the period since c
 
 ### Time Bars
 
-define the BarBuilder trait ( i.e. interface).
+Define the BarBuilder trait ( i.e. interface).
 ```rust
 pub trait BarBuilder {
     fn trade_update(&mut self, timestamp: &u64, price: &f64, qty: &f64) -> Option<Bar>;
