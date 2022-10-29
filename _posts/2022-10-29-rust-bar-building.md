@@ -12,7 +12,7 @@ category:
 Candlesticks are a common way to represent price and volume of an asset over a period of time.
 There are various common types of bars such as time, volume, tick bars, hieken-ashi, renko to name a few.
 There is a lot of information about the implementations of these on the internet so their details will not be covered here.
-The aim of this article is to share some tips for implementation and also a solution to the implementation of Deprdo's volume imbalance bars from the Famous book "Advances in financial machine learning".
+The aim of this article is to share some tips for implementation and also a solution to the implementation of Marcos Lopez de Prado's volume imbalance bars from the Famous book "Advances in financial machine learning".
 
 This article assumes that the reader is familiar with what a candlestick is,
 and the common types of methods of building candlesticks.
