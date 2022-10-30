@@ -294,7 +294,7 @@ I need to write an article about correlation structure in cryptos since its fasc
 It's mostly fascinating since there isn't any!
 The first principal component of the correlation matrix is about 85% of variance and the first two components explained about 95% of the market.
 So what does that means in practical terms? When bitcoin moves, or etherium moves, so does everything else.
-There are good posts by [tr8dr](https://tr8dr.wordpress.com/2009/12/30/equity-clusters/) in regard to correlation clustering and [transfer-entropy](https://tr8dr.wordpress.com/2010/08/29/transfer-entropy/)
+There are good posts by tr8dr in regard to [correlation clustering](https://tr8dr.wordpress.com/2009/12/30/equity-clusters/) and [transfer-entropy](https://tr8dr.wordpress.com/2010/08/29/transfer-entropy/).
 When this is applied to cryptocurrencies the results is not a very complex graph, but you can see the structures between L0 coins, L1 coins DeFi/NFTs coins etc.
 
 Conceptually I think volume should not be thought of as per asset, but per risk factor. So what we can do is make a volume bar builder
