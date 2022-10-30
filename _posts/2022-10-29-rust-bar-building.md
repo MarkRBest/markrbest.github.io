@@ -12,7 +12,8 @@ category:
 Candlesticks are a common way to represent price and volume of an asset over a period of time.
 There are various common types of bars such as time, volume, tick bars, hieken-ashi, renko to name a few.
 There is a lot of information about the implementations of these on the internet so their details will not be covered here.
-The aim of this article is to share some tips for implementation and also a solution to the implementation of Marcos Lopez de Prado's volume imbalance bars from the Famous book "Advances in financial machine learning".
+The aim of this article is to share some tips for implementation and also an implementation of Marcos Lopez de Prado's
+volume imbalance bars from the book [Advances in financial machine learning](https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-9781119482086).
 
 This article assumes that the reader is familiar with what a candlestick is,
 and the common types of methods of building candlesticks.
@@ -24,8 +25,7 @@ aim to sample by information rate as opposed to time. This is a similar idea to 
 [Heston Model](https://en.wikipedia.org/wiki/Heston_model) in which the process for the volatility is separately modelled and then just assumes everything else is normal.
 
 This article covers a lot of the information regarding not only these alternative bars but the impact on the statistical properties of the resulting return series [Bars](http://www.sefidian.com/2021/06/12/introduction-to-advanced-candlesticks-in-finance-tick-bars-dollar-bars-volume-bars-and-imbalance-bars/).
-The TLDR; is kurtosis is bad. You don't want to find out the trend has changed, but by waiting for a new candle stick close
-the position is 20% underwater.
+TLDR; kurtosis is bad. You don't want to find out the trend has changed, but waiting for a new candle stick left the position 20% underwater.
 
 Let's start by defining a bar
 
@@ -194,10 +194,9 @@ The idea of a volume imbalance bar is that a new bar should be created if either
 the ratio of buys to sells exceeds a threshold. The implementation of this can be tricky since the thresholds need to be set.
 If the thresholds are calculated using the generated bars they can have degenerate behaviour where expectations tend towards zero or infinity.
 
-
 My solution to this is to set the imbalance threshold to be a % of the expected volume so if the volume is greater than x or
-the imbalance threshold is 20% then a new bar will happen if the imbalance exceeds 0.2 * x. This means only two parameter are needed are the
-time aggregation for the time builder and the imbalance threshold percent.
+the imbalance threshold is greater than 20% then a new bar will be created.
+This means only parameters needed are the time aggregation, the decay for the volume ema for the time builder and the imbalance threshold percent.
 Since the threshold is not a function of the generated imbalance bars the system does not have issues with the expectations tending to zero or infinity.
 
 The following is the implementation of a dynamic volume imbalance bar builder.
@@ -216,7 +215,7 @@ pub struct DynVolumeImbBarBuilder<T: BarBuilder> {
 ```
 note the `<T: BarBuilder>` which means the builder uses another builder to be its "clock".
 Normally a time bar is used but other types of bar could also be used such a range bar.
-This would give a new bar when an amount of volume trades that would normally move the market by x%.
+This would give a new bar when an amount of volume trades that would normally move the market by a specified percentage.
 
 ```rust
 
@@ -292,15 +291,17 @@ impl<T: BarBuilder> DynVolumeBarBuilder<T> {
 ### Multi Bar Volume Imbalance Bars
 
 I need to write an article about correlation structure in cryptos since its fascinating.
-It's mostly fascinating since there isn't any!The first principal component of the correlation matrix is about 85% of variance and the first two components explained about 95% of the market.
+It's mostly fascinating since there isn't any!
+The first principal component of the correlation matrix is about 85% of variance and the first two components explained about 95% of the market.
 So what does that means in practical terms? When bitcoin moves, or etherium moves, so does everything else.
 There are good posts by [tr8dr](https://tr8dr.wordpress.com/2009/12/30/equity-clusters/) in regard to correlation clustering and [transfer-entropy](https://tr8dr.wordpress.com/2010/08/29/transfer-entropy/)
-When this is applied to crypto currencies the results is not a very complex graph but you can see the structures between L0 coins, L1 coins DeFi/NFTs coins etc.
+When this is applied to cryptocurrencies the results is not a very complex graph, but you can see the structures between L0 coins, L1 coins DeFi/NFTs coins etc.
 
 Conceptually I think volume should not be thought of as per asset, but per risk factor. So what we can do is make a volume bar builder
 which ticks not when the volume in asset X breaks a threshold but when the amount of risk in a certain risk factor breaks a threshold.
 
-A very simple version of this can be done by monitoring multiple assets and aggregating their volume. A new sample is taken when this aggregated volume crosses a threshold.
+A very simple version of this can be done by monitoring multiple assets and aggregating their volume.
+A new set of candle sticks are generated when the aggregated volume crosses a threshold.
 This is basically assuming that correlations are 1 for all assets which in crypto is not a particularly bad assumption.
 n.b. The below implementation assumes all assets are in the same quoted currency.
 
@@ -457,7 +458,7 @@ This would avoid any over head from memory allocation.
 ### Conclusion
 
 1. Using time bars to set the volume threshold is a neat way to avoid seasonality issues and also the complexity of defining multiple thresholds for different assets.
-2. Using time bars to set a baseline for volume imbalance bars is a good way to avoid the problem if the threshold becoming degenerate and greatly simplifies the choosing of hyper parameters.
+2. Using time bars to set a baseline for volume imbalance bars is a good way to avoid the problem of the threshold becoming degenerate and greatly simplifies the choosing of hyper parameters.
 3. When multiple assets are concerned volume can be thought of as risk and its worth generating volume bars synchronously by looking at total traded risk.
 
 
