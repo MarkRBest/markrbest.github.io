@@ -14,5 +14,3 @@ My plan for the blog is to discuss research as I progress and to present it as a
 Research is exactly that, and anyone that has done a lot of it knows both the euphoria of finding a new idea and the sadness of giving up on something with significant time investment.
 I hope the ideas here can at least inspire people to continue their search for profitable ideas.
 
-
-[contact me](mailto: mark.r.best@gmail.com)

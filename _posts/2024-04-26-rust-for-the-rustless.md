@@ -61,7 +61,7 @@ if name = lookup.get(&1).unwrap_or("NA");
 println!("{}", name);
 ```
 
-### Pattern Matching
+## Pattern Matching
 
 Where this gets quite neat is dealing with situations where you have many optional variables. So in the example
 
@@ -78,7 +78,7 @@ Using multiple unwraps is just bad.
 You could have an early exit, or a series of early exit checks.
 
 ```rust
-if A_opt.is_none() || B_opt.is_none() || C_opt.is_none() {return }
+if A_opt.is_none() || B_opt.is_none() || C_opt.is_none() { return }
 println!("a: {} b: {} c: {}", A_opt.unwrap(), B_opt.unwrap(), C_opt.unwrap());
 ```
 
@@ -88,14 +88,55 @@ A better solution is using match and pattern matching to be able to deal with di
 
 ```rust
 match (A_opt, B_opt, C_opt) {
-    (Some(a), Some(b), Some(c)) => { println!("a: {} b: {} c: {}", a, b, c); }
-    (None, _, _) => { eprintln!("A is none"); }
-    (_, None, _) => { eprintln!("B is none"); }
-    (_, _, None) => { eprintln!("C is none"); }
+    (Some(a), Some(b), Some(c)) => {
+        println!("a: {} b: {} c: {}", a, b, c);
+    }
+    (a, b, c) => {
+        if a.is_none() { eprintln!("A is none"); }
+        if b.is_none() { eprintln!("B is none"); }
+        if c.is_none() { eprintln!("C is none"); }
+    } 
 }
 ```
 
 So the above code allows the different cases to be dealt with separately if needed and the happy case to be simply defined.
+
+## Be Careful of Syntactic Sugar
+
+I was once using a convenient method to avoid having multiple constructors if only a subset of fields are to be set.
+
+```rust
+struct MyStruct {
+    id: u64,
+    a: f64,
+    b: f64,
+    c: f64,
+}
+```
+
+To create an object if you maybe want to create a default object but set the id to a specific value 
+
+```rust
+let obj = MyStruct{id: 007, ..Default::default() };
+```
+
+I originally thought the compiler would be smart enough to realize that if you are defaulting a value, it does not need to be created in the call to Default::default().
+This is not the case. A complete default object is created, then the field(s) in question are overwritten. 
+If there is a type that is not a primitive or the default is expensive, this can be expensive. 
+
+The alternative I use is to have specific constructors.
+```rust
+impl MyStruct {
+    fn new_with_id(id: u64) -> Self {
+        MyStruct { id, a: 0.0, b: 0.0, c: 0.0 }
+    }
+}
+
+// create obj
+let obj = MyStruct::new_with_id(007);
+```
+
+This avoids any duplication at runtime and can be much more efficient. 
 
 ## [Error Chain](https://docs.rs/error-chain/latest/error_chain/)
 
@@ -203,7 +244,7 @@ cargo clippy --all-targets --all-features
 
 Rust uses composition rather than inheritance.
 Inheritance if you come from languages like Java seems like a nice idea, but it is prone to bugs.
-It is better to explicitly define the behaviours of each struct to avoid code being magically added or changes as superclasses are modified.
+It is better to explicitly define the behaviours of each struct to avoid code being magically added or changed as superclasses are modified.
 I worked on some java code once where the inheritance structure was about seven layers deep, and some methods were removed in one layer and added back in the next.
 Trying to work out what code was actually running in the seventh layer was pretty much impossible.
 
@@ -243,7 +284,74 @@ In other languages, this is more challenging. This can lead to the private varia
 This is a common testing anti-pattern.
 In general, private fields/methods should not be tested as it exposes the implementation and can make refactoring difficult.
 
-### Lifetimes Strings and &str
+## Performance Benchmarking
+
+So you have written some new code and want to know if it is awful. 
+Or you just want to compare the performance of various libraries with a hand rolled solution to prove youre smarter than everyone else.
+
+[Criterion](https://github.com/bheisler/criterion.rs) is a rust benchmarking library that makes this really simple to do. 
+Just add this to cargo.toml
+```toml
+criterion = { version = "0.5.1", features = ["html_reports"] }
+
+[profile.bench]
+lto = true
+opt-level = 3
+codegen-units = 1    # improved benchmark reliability
+
+[[bench]]
+name = "hash_bench"
+harness = false
+```
+
+This is an example benchmark test that can be placed in `benches/hash_bench.rs`.
+
+```rust
+use criterion::{black_box, Criterion, criterion_group, criterion_main};
+use hashbrown::HashMap as HBHashMap;
+use std::collections::HashMap as StdHashMap;
+use fxhash::{FxHashMap};
+
+fn map_fun1(map: &mut StdHashMap<i64, i64>) {
+    map.insert(3, 42);
+}
+
+fn map_fun2(map: &mut FxHashMap<i64, i64>) {
+    map.insert(3, 42);
+}
+
+fn map_fun3(map: &mut HBHashMap<i64, i64>) {
+    map.insert(3, 42);
+}
+
+fn hash_brown_test(c: &mut Criterion) {
+    let mut map: HBHashMap<i64, i64> = HBHashMap::default();
+    c.bench_function("hashbrown map test", |b| b.iter(|| map_fun3(black_box(&mut map))));
+}
+
+fn fx_map_test(c: &mut Criterion) {
+    let mut map: FxHashMap<i64, i64> = FxHashMap::default();
+    c.bench_function("fxhash map test", |b| b.iter(|| map_fun2(black_box(&mut map))));
+}
+
+fn std_map_test(c: &mut Criterion) {
+    let mut map: StdHashMap<i64, i64> = StdHashMap::default();
+    c.bench_function("std map test", |b| b.iter(|| map_fun1(black_box(&mut map))));
+}
+
+criterion_group!(benches, std_map_test, fx_map_test, hash_brown_test);
+criterion_main!(benches);
+```
+
+To run the benchmarking it is as simple as running `cargo bench`.
+When the html reports feature enabled produces reports like this. 
+
+![basic-latency](/assets/2024-04-26/benchmark.png)
+
+Html reports can be found in the target/criterion directory. The reports are useful to dig deeper into the latency distribution of the code under test.
+Criterion also monitors the performance during refactoring to warn if the performance of a function has improved or regressed.
+
+## Lifetimes Strings and &str
 
 This is something that is really important for performance. The borrow checker can be a pain. Using strings should be avoided in general,
 that said, when they are used they should be used once.
@@ -344,7 +452,7 @@ Most programming books and incredible terse and frankly just boring to read. So 
 ### [The Rust Programming Language](https://a.co/d/9jgNk8K)
 
 This is kind of the bible of Rust. That said, it's boring and more of a reference book.
-I have completely read it, I have only picked through sections such as error handling etc.
+I have not completely read it, I have only picked through sections such as error handling etc.
 I would still say its worth having in case you need to look things up.
 
 ### [Rust Brain Teasers](https://a.co/d/hpNxurQ)
