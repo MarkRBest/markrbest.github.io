@@ -6,50 +6,54 @@ category:
 - Latency
 ---
 
-There is a common debate when people are discussing code optimisation that relates to how fast code needs to be. 
-A recent Twitter post about parsing binance BBA messages stated processing times of around 200ns. This is, in my admission, very fast.  
+There is a common debate when people are discussing code optimisation that relates to how fast code needs to be.
+A recent Twitter post about parsing binance BBA messages stated processing times of around 200ns. This is, in my admission, is very fast.  
 To put it into perspective, Serde is a common rust deserialization library and is incredibly easy to use. 
-It is however, a lot slower than the optimised alternative taking around 2-3 micro seconds to do the same work the 200 ns code. 
+It is however, a lot slower than the optimised alternative taking around 2-3 micro seconds to do the same work. 
 But who cares if your code takes 2 micro seconds longer to process a message? 
 Is this going to make a huge difference to your pnl give that network jitter can be measured in milliseconds?
-The answer is yes, and maybe not for the reasons you think.
+The answer is yes, and maybe not for the reason you think.
 
 ### Tick to Trade
 
-Tick to trade (t2t) is measured as the time taken to receive a message to the time taken to make and exchange api call (place/cancel/amend). 
-This can be measured in software or at the network interface card.  
-Most trading systems are event/message engines and at the core the strategy itself will be single threaded.  
-If you are running a latency sensitive strategy, having a low tick to trade means a higher chance that an order will be filled.
+Tick to trade (t2t) is measured as the time taken to receive a message and to generate some form of exchange api call (place/cancel/amend). 
+This processing time can be measured either in software or at the network interface card.  
+Most trading systems are event/message engines and at their core, the strategy is single threaded.
+If you are running a latency sensitive strategy, having a low tick to trade means an order get to the exchange sooner and has a higher chance of being filled.
 
-For strategies like market making it is still really important to be fast but possibly for different reasons. 
+For strategies like market making it is still really important to be fast, just for different reasons. 
 The simplest reason is that if there is a signal that requires cancelling orders, we would like to do this as quickly as possible.
 
 The main issue is related to the statistical distribution of message arrival rates. Financial market data are known to be hetero-skedastic.
 That is just a fancy way to say markets occasionally go bananas. When market making you might be monitoring many different markets and instruments at the same time.
 It would be much simpler if data arrived at regular intervals and everyone was given enough time to make decisions.
-This is however not the world in which we live.
+This is however not the world we live in.
 
 ![arrival-dis](/assets/2024-05-13/packet_distribution.png)
 
 The image above is from a paper about queue behaviour and packet delays. It is the closest thing I could find that describes the problem.
-The time between messages is not uniform and it tends for follow an exponential family distribution. 
-The resulting effect of this is when it rains, it pours and you will get a lot of messages all at once. 
+The time between messages is not uniform and it tends to follow an exponential distribution. 
+The resulting effect is, when it rains, it pours and you will get a lot of messages all at once. 
 
 Where 2t2 latency becomes a problem is due to the limits of throughput. It is possible to get 100s or 1000s of messages in a very short space of time. 
-Maybe (and this is likely) the message that triggers a trade is at the back of the stack of messages. 
+Maybe (and this is likely) the message that triggers a trade is the last one in the queue.
 So if your per message processing time is 100 mics, during a burst of 1000 messages, you will take 100 milliseconds before you send a trade. 
 So you think you have a t2t of 100 mics, but in actuality, the trade was delayed much longer than you would expect. 
 
 ### Analysis
 
 I was interested to see the effect of this on real world crypto data. In reality, for a production system, the actual t2t for orders should be monitored and measured.
-This analysis is indicative of how the delay distribution changes as a function of message processing time. It also gives an idea of what kind of processing times you should be aiming for.
+This analysis is indicative of how the delay distribution changes as a function of message processing time. 
+It also gives an idea of what kind of processing times you should be aiming for.
 
-The best method to measure the impact of delays is to tag market data with an id. Exchange api calls (place/cancel/amend) can then be tagged with the same id of the market data that triggered the api call.
-If there are delays due to the queue being saturated, it is possible to detect it. This can be a little tricky to do as it requires tagging messages on the network interface card (NIC).
+The best method to measure the impact of delays is to tag market data with an id. 
+Exchange api calls (place/cancel/amend) can then be tagged with the same id of the market data that triggered the api call.
+If there are delays due to the queue being saturated, it is possible to detect it. 
+This can be a little tricky to do as it requires tagging messages on the network interface card (NIC).
 If you are able to do this, it is worth it as it is the only way to truly know if the websocket is not processed quickly enough.
 
-I collected data for 12 liquid swap and spot crypto pairs on 4 exchanges. The total number of messages for May 1st 2024 was 175,001,142.
+The data is from 12 liquid swap and spot crypto pairs on 4 exchanges. 
+The data was collected on May 1st 2024 and the message count was 175,001,142.
 If all these messages were uniformly spaced in a day, there will be approximately 494.3 microseconds between each message.
 This is not a lot of time, but it should be more than enough.
 
@@ -77,7 +81,8 @@ for i in timestamps:
     now += offset
 ```
 
-I was actually quite surprised by the results. I have always known that as a rule of thumb, it is better to have an internal latency below 10 micro seconds.
+I was actually quite surprised by the results. 
+In the case where each message takes 100 micros each to process, 65% of messages will have some delay.
 
 | t2t        | Num Delayed | Ratio Delayed |
 |------------|-------------|----------------|
@@ -87,8 +92,8 @@ I was actually quite surprised by the results. I have always known that as a rul
 | 100 micros | 114,178,670 | 65.24%         |
 
 
-In the case where each message takes 100 micros each to process, 65% of messages will have some delay. 
-I was surprised that even 10 micro seconds processing time means that 35% of messages experience some delay. 
+As a rule of thumb, it is better to have an internal latency below 10 micro seconds.
+I was surprised that even 10 micro second processing times mean that 35% of messages experience some delay. 
 The distribution of delays can be seen in the table below.
 
 
@@ -108,7 +113,7 @@ Languages like python are thus not really viable solution for market making a la
 So if this is a problem, what are the potential fixes?
 
 1. Be faster
-2. Triage messages and conflate messages. This is only really possible with order book data using seq locks
+2. Triage and conflate messages. This is only really possible with order book data using seq locks
 3. Subscribe to less data
 4. Parallelize parts of the pipeline that are pre strategy/risk engine 
 
