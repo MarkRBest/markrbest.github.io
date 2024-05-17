@@ -449,7 +449,7 @@ This is how I originally found out about Rayon and some of its benefits for asyn
 This is a great introduction into some of the key concepts into Rust. The main thing is that its readable and very quick to absorb if you come from other languages.
 Most programming books and incredible terse and frankly just boring to read. So this concept is really clever to take the same content and make it palatable.
 
-### [Rust Exercieses](https://rust-exercises.com/)
+### [Rust Exercises](https://rust-exercises.com/)
 
 This course will teach you Rust's core concepts, one exercise at a time.
 You'll learn about Rust's syntax, its type system, its standard library, and its ecosystem.
