@@ -17,7 +17,7 @@ This article is about what can be the most dangerous part of a high-frequency tr
 And here it is...
 
 ```python
-if abs(oms.position(instrument_id) + order_qty) < POSTION_LIMIT and !oms.has_live_orders() {
+if abs(oms.position(instrument_id) + order_qty) < POSTION_LIMIT and not oms.has_live_orders() {
     oms.place_order(instrument_id, order_price, order_qty);
 }
 ```
