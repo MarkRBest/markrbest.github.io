@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  The Hidden Dangers of Writing an OMS
+title:  Hidden Dangers of Writing an OMS
 category:
 - HFT
 - Algo Trading
