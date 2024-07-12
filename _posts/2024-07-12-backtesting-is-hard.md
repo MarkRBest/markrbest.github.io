@@ -1,1 +1,7 @@
-This is just an idea for an article
+---
+layout: post
+title:  Backtesting is hard
+category:
+- Algo Trading
+- Backtesting
+---
