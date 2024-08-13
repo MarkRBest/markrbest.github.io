@@ -91,7 +91,7 @@ Setting up the sender and receiver is as simple as creating a lockfree queue to 
 ```rust
 use lockfree::channel::spsc::{create, Sender, Receiver};
 
-let (mut sx, mut rx) = create::<LogMessage>();
+let (mut tx, mut rx) = create::<LogMessage>();
 
 // set up thread to drain logging queue
 let guard = thread::spawn(move || {
@@ -106,8 +106,8 @@ let guard = thread::spawn(move || {
 });
 
 // send a log messages
-sx.send(LogMessage::Quote(QuoteLogData::new(2008, 6000.25, 60000.26))).expect("Error sending log message");
-sx.send(LogMessage::Alphas(AlphaLogData::new(2008, 10.0, 20.0, 1.0))).expect("Error sending log message");
+tx.send(LogMessage::Quote(QuoteLogData::new(2008, 6000.25, 60000.26))).expect("Error sending log message");
+tx.send(LogMessage::Alphas(AlphaLogData::new(2008, 10.0, 20.0, 1.0))).expect("Error sending log message");
 
 ```
 
