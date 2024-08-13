@@ -62,7 +62,8 @@ impl AlphaLogData {
 
 impl Display for AlphaLogData {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Alphas: instrument_id: {} ema_fast: {} ema_slow: {} vola: {}", self.instrument_id, self.ema_fast, self.ema_slow, self.vola)
+        write!(f, "Alphas: instrument_id: {} ema_fast: {} ema_slow: {} vola: {}",
+                   self.instrument_id, self.ema_fast, self.ema_slow, self.vola)
     }
 }
 
@@ -90,15 +91,17 @@ Setting up the sender and receiver is as simple as creating a lockfree queue to 
 ```rust
 use lockfree::channel::spsc::{create, Sender, Receiver};
 
-let (mut sx, mut rx) = create::<LogMessage>();  // lock free channel
+let (mut sx, mut rx) = create::<LogMessage>();
 
+// set up thread to drain logging queue
 let guard = thread::spawn(move || {
     let core_ids = core_affinity::get_core_ids().unwrap();
     core_affinity::set_for_current(*core_ids.last().unwrap());
 
-    match (rx.recv()) {
-        Ok(msg) => { println ! ("{}", msg) }
-        Err(e) => { panic!("well this is not good"); }
+    loop {
+        if let Ok(msg) = rx.recv() {
+            println ! ("{}", msg);
+        }
     }
 });
 
