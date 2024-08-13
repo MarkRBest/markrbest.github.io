@@ -12,14 +12,14 @@ This post will be short and the core of the ideas are a follow up to the [origin
 
 The key takeaways from the original article are: 
 
-1. IO and Logging should not be done on the strategy hot path.
-2. Formatting is expensive, and it is better to log variables and to format them on the logging core.
+* IO and Logging should not be done on the strategy hot path.
+* Formatting is expensive, and it is better to log variables and to format them on the logging core.
 
-This article introduces a couple of improvements that could be made to the original code. 
+This article introduces improvements to the original code. 
 
-1. Pushing a closure onto the ring buffer means a Box<T> is created on the heap.
-2. The format string needs to be pushed onto the ring buffer each time which can be larger than the data itself.
-3. Performance can be better optimised when an object's size is known at compile time. 
+* Pushing a closure onto the ring buffer means a Box<T> is created on the heap.
+* The format string needs to be pushed onto the ring buffer each time which can be larger than the data itself.
+* Performance can be better optimised when an object's size is known at compile time. 
 
 The solution to the above issues is pretty simple. 
 The RawFunc is replaced with a Logging Enum and a set of Logging Messages that define sets of data to be logged. 
