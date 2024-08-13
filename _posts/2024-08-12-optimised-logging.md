@@ -3,8 +3,8 @@ layout: post
 title:  Even Faster Logging in Rust! 
 category:
 - HFT
+- Programming
 - Rust
-- Algo Trading
 ---
 
 I was re-reading some older posts, and I realised I owed some readers a follow up. Hopefully I will be forgiven that this took 2 years.
