@@ -59,7 +59,7 @@ This was a course book from my master's degree. It's an excellent foundational b
 
 * [Value at Risk: The New Benchmark for Managing Financial Risk, 3rd Edition](https://a.co/d/bzi1VpT)
 
-# Regime Change
+### Regime Change
 
 This isn't really that great a book. It is more of a paper that was converted into a book.
 The ideas around direction change and having a time-invariant way to classify price changes are interesting.
@@ -81,7 +81,7 @@ And they are correct, I really should get around to reading it.
 
 * [Reminiscences of a Stock Operator](https://amzn.eu/d/ixfco0z)
 
-# Tail Risk Management
+### Tail Risk Management
 
 These two books are interesting but are likely not useful for 99% of people. The idea summarised is that options can be used to hedge downside risk. 
 Options are also expensive due to theta and also in a normal market they have delta which you may not want as it interferes with the core strategy.
@@ -92,7 +92,7 @@ If you don't know what you're doing, you might add more risk than the portfolio 
 * [Unperturbed By Volatility: A Practitioner's Guide To Risk](https://a.co/d/3v5cu7w)
 * [The Second Leg Down: Strategies for Profiting after a Market Sell-Off](https://a.co/d/28xGfPx)
 
-# Trading Platform and HPC
+### Trading Platform and HPC
 
 This book is not the best. That said, there are not many end-to-end books on the topic of HFT trading platforms. 
 If you are new to trading platforms this is one of the few overviews I have seen.
