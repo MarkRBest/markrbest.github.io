@@ -19,6 +19,8 @@ These are not referal links, they are just Amazon links. Feel free to source the
 
 ### Portfolio management
 
+This book is a must-have for anyone who wants to trade multi-asset portfolio strategies. It covers a massive range of topics around portfolio risk and portfolio construction.
+
 * [Quantitative Portfolio Management: The Art and Science of Statistical Arbitrage](https://a.co/d/cyOnB1B)
 
 Gappy's book is an excellent guide to factor investing and also factor models for portfolio management. 
