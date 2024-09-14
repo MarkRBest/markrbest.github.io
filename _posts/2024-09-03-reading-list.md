@@ -55,6 +55,13 @@ These books are mostly printed ebooks. They are cheap but are an introduction to
 * [ORDER FLOW: Trading Setups](https://amzn.eu/d/8n6kjsC)
 * [VOLUME PROFILE: The insider's guide to trading](https://amzn.eu/d/jlOuwt8)
 
+### Macro / Cycle Analysis
+
+This is a book about credit and the effects of credit cycles on asset prices.
+It has some interesting points about not trying to time the market, but trying to position relative to the correct point the credit cycle.
+
+* [Mastering The Market Cycle](https://amzn.eu/d/94XUJmU)
+
 ### Risk Management
 
 This was a course book from my master's degree. It's an excellent foundational book on portfolio risk modelling.
