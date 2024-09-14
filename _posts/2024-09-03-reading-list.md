@@ -165,19 +165,25 @@ This section is mainly for me but if you're interested, these are the best books
 
 This was a text book for my PDC and is a great book
 * [Practical Permaculture: for Home Landscapes, Your Community, and the Whole Earth](https://amzn.eu/d/9S89m2E)
+
 The Seymour book is known as the bible of self sufficency. Its and old book but full of useful information.
 * [The The New Complete Book of Self-Sufficiency](https://amzn.eu/d/75A6fyg)
+
 Masanobu Fukuoka’s book about farming in harmony with nature rather than fighting it. 
 * [The One-Straw Revolution: An Introduction to Natural Farming](https://amzn.eu/d/0rNmukF)
+
 This is a short book that covers everything about the ecosystems of healthy soil.
 * [A Soil Owner's Manual](https://amzn.eu/d/2Uk55Z1)
+
 Sepp Holzer is really well known in the permaculture world. The book is about restoring the ecosystem of a large area of Spain.
 His techniques are relatively simple and are mainly about helping the land re-invigorate itself. 
 * [Desert or Paradise: Restoring Endangered Landscapes Using Water Management, Including Lake and Pond Construction](https://amzn.eu/d/0aoF3wq)
+
 A story about Gabe Brown's farm and how they used regenerative agriculture to save their farm.
 Regenerative agriculture is about mixing livestock and arable agriculture and working them together.
 The net result is healthy soil, healthy plants, healthy animals and higher yield for lower costs.
 * [Dirt to Soil: One Family s Journey into Regenerative Agriculture](https://amzn.eu/d/8yaQdVK)
+
 This is a collection of low tech solutions to reduce your carbon footprint without reducing quality of life.
 * [Building a Better World in Your Backyard](https://amzn.eu/d/4eZyxnZ)
 
