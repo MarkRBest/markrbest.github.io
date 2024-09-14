@@ -5,11 +5,11 @@ category:
 - Books
 ---
 
-How do you eat an elephant? I have wanted to write a reading list but I have been apprehensive since I didn't want to include too much and wanted also to explain why the books were in the list. 
-If you want to trade crypto there is no point reading the Hull interest rate model book. This list likely will be a work in progress so keep that in mind.
-As I write this I realise I have a deep problem with how many books I have.
+I have wanted to write a reading list for a while. I've been apprehensive because I didn't want to include too much and wanted also to explain why the books were in the list. 
+For example, if you trade crypto there is not much point reading the Hull IR book. This list likely will be a work in progress so keep that in mind.
+As I write this I realise I have a problem with how many books I have.
 
-These are not referal links, they are just Amazon links. Feel free to source the books from wherever you like. 
+These are not referral links, they are just Amazon links. Feel free to source the books from wherever you like. 
 
 ### General 
 
@@ -40,6 +40,10 @@ Market making is very similar to these ideas but in essence, you have a forecast
 This book is great. The issue with A/B testing is that you want to switch over to the best model as quickly as possible. The author is ex-getco and its very well written.
 
 * [Experimentation for Engineers: From A/B testing to Bayesian optimization](https://a.co/d/gItrgAC)
+ 
+Timothy Master's books are a good read for those wanting to build quantitative strategies. 
+He does a lot of data mining, so the books address common issues that come from this. They include topics like, probability of false discovery, combinatorial symmetric cross validation (CSCV), optimisation objectives and much more.  
+
 * [Statistically Sound Indicators For Financial Market Prediction: Algorithms in C++](https://a.co/d/fi2g6TS)
 * [Testing and Tuning Market Trading Systems: Algorithms in C++](https://amzn.eu/d/2T57Z9f)
 
@@ -154,6 +158,28 @@ This is a rust reference book. So it is not really meant to be read cover to cov
 
 * [The Rust Programming Language](https://amzn.eu/d/5iQDjWL)
 
+
+### Permaculture
+
+This section is mainly for me but if you're interested, these are the best books i've read.
+
+This was a text book for my PDC and is a great book
+* [Practical Permaculture: for Home Landscapes, Your Community, and the Whole Earth](https://amzn.eu/d/9S89m2E)
+The Seymour book is known as the bible of self sufficency. Its and old book but full of useful information.
+* [The The New Complete Book of Self-Sufficiency](https://amzn.eu/d/75A6fyg)
+Masanobu Fukuoka’s book about farming in harmony with nature rather than fighting it. 
+* [The One-Straw Revolution: An Introduction to Natural Farming](https://amzn.eu/d/0rNmukF)
+This is a short book that covers everything about the ecosystems of healthy soil.
+* [A Soil Owner's Manual](https://amzn.eu/d/2Uk55Z1)
+Sepp Holzer is really well known in the permaculture world. The book is about restoring the ecosystem of a large area of Spain.
+His techniques are relatively simple and are mainly about helping the land re-invigorate itself. 
+* [Desert or Paradise: Restoring Endangered Landscapes Using Water Management, Including Lake and Pond Construction](https://amzn.eu/d/0aoF3wq)
+A story about Gabe Brown's farm and how they used regenerative agriculture to save their farm.
+Regenerative agriculture is about mixing livestock and arable agriculture and working them together.
+The net result is healthy soil, healthy plants, healthy animals and higher yield for lower costs.
+* [Dirt to Soil: One Family s Journey into Regenerative Agriculture](https://amzn.eu/d/8yaQdVK)
+This is a collection of low tech solutions to reduce your carbon footprint without reducing quality of life.
+* [Building a Better World in Your Backyard](https://amzn.eu/d/4eZyxnZ)
 
 
 If there is anything that you feel is missing from the list then please let me know and ill try to read it and add it. 
