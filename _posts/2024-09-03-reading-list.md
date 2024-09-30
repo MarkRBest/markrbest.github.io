@@ -53,12 +53,13 @@ Market making is very similar to these ideas but in essence, you have a forecast
 This book is great. The issue with A/B testing is that you want to switch over to the best model as quickly as possible. The author is ex-getco and its very well written.
 
 * [Experimentation for Engineers: From A/B testing to Bayesian optimization](https://a.co/d/gItrgAC)
- 
+
 Timothy Master's books are a good read for those wanting to build quantitative strategies. 
 He does a lot of data mining, so the books address common issues that come from this. They include topics like, probability of false discovery, combinatorial symmetric cross validation (CSCV), optimisation objectives and much more.  
 
 * [Statistically Sound Indicators For Financial Market Prediction: Algorithms in C++](https://a.co/d/fi2g6TS)
 * [Testing and Tuning Market Trading Systems: Algorithms in C++](https://amzn.eu/d/2T57Z9f)
+* [Statistically Sound Machine Learning for Algorithmic Trading of Financial Instruments: Developing Predictive-Model-Based Trading Systems Using TSSB](https://amzn.eu/d/66574yF)
 
 ### Statistical Arbitrage
 
