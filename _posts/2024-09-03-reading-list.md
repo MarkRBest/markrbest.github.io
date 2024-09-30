@@ -68,7 +68,7 @@ This book has some interesting chapters about mid-correction and dealing with ju
 * [Statistical Arbitrage: Algorithmic Trading Insights and Techniques](https://amzn.eu/d/id4sMyl)
 
 This is not a book but an article. It's about how to build a risk neutral long short portfolio strategy. 
-What is nice about it, is its very simple and generic and can be used either with rich/cheap or momentum alphas. 
+It is very simple and generic and can be used either with rich/cheap (mean reversion) or momentum alphas. 
 
 * [The Modern Spirit of Statistical Arbitrage](https://x.com/systematicls/status/1802666506125558115?s=46&t=rrb1VDYgAE-7u13wznr-hg)
 
