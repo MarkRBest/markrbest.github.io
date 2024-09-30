@@ -227,6 +227,7 @@ This is a collection of low-tech solutions to reduce your carbon footprint witho
 Worms are really important to healthy soil, they airate, integrate carbon into the soil and improve drainage. 
 The best set up I have seen was in Spain and used upcycled bath tubs filled with worms.
 When it rained, the water was collected via the drain hole for compost tea, then every 6 weeks half the volume could be added to the garden. 
-*[Worm Farming 101: A Practical Guide to the Essentials of Vermiculture & Vermicomposting](https://amzn.eu/d/3kXOMvo)
+
+* [Worm Farming 101: A Practical Guide to the Essentials of Vermiculture & Vermicomposting](https://amzn.eu/d/3kXOMvo)
 
 If there is anything that you feel is missing from the list then please let me know and ill try to read it and add it. 
