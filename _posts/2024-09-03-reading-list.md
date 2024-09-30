@@ -185,12 +185,12 @@ This is a rust reference book. So it is not really meant to be read cover to cov
 
 ### Permaculture
 
-This section is mainly for me but if you're interested, these are the best books i've read.
+This section is mainly for me, but if you're interested, these are the best books i've read.
 
 This was a text book for my PDC and is a great book
 * [Practical Permaculture: for Home Landscapes, Your Community, and the Whole Earth](https://amzn.eu/d/9S89m2E)
 
-The Seymour book is known as the bible of self sufficency. Its and old book but full of useful information.
+The Seymour book is known as the bible of self-sufficiency. It is an old book but full of useful information.
 * [The The New Complete Book of Self-Sufficiency](https://amzn.eu/d/75A6fyg)
 
 Masanobu Fukuoka’s book about farming in harmony with nature rather than fighting it. 
@@ -208,8 +208,12 @@ Regenerative agriculture is about mixing livestock and arable agriculture and wo
 The net result is healthy soil, healthy plants, healthy animals and higher yield for lower costs.
 * [Dirt to Soil: One Family s Journey into Regenerative Agriculture](https://amzn.eu/d/8yaQdVK)
 
-This is a collection of low tech solutions to reduce your carbon footprint without reducing quality of life.
+This is a collection of low-tech solutions to reduce your carbon footprint without reducing quality of life.
 * [Building a Better World in Your Backyard](https://amzn.eu/d/4eZyxnZ)
 
+Worms are really important to healthy soil, they airate, integrate carbon into the soil and improve drainage. 
+The best set up I have seen was in Spain and used upcycled bath tubs filled with worms.
+When it rained, the water was collected via the drain hole for compost tea, then every 6 weeks half the volume could be added to the garden. 
+*[Worm Farming 101: A Practical Guide to the Essentials of Vermiculture & Vermicomposting](https://amzn.eu/d/3kXOMvo)
 
 If there is anything that you feel is missing from the list then please let me know and ill try to read it and add it. 
