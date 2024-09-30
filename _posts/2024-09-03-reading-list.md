@@ -25,7 +25,7 @@ Kaufman's book is more of an encyclopedia of techniques. Its useful as a referen
 
 * [Trading Systems and Methods](https://a.co/d/4w2G4hk)
 
-Ernies Chan's books also come well recommended. 
+Ernie Chan's books also come well recommended. 
 
 * [Algorithmic Trading: Winning Strategies and Their Rationale](https://amzn.eu/d/7e5Oc64)
 * [Quantitative Trading: How to Build Your Own Algorithmic Trading Business](https://amzn.eu/d/37DQJne)
