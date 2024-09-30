@@ -104,7 +104,7 @@ The ultimate conclusion of the book is that their method doesn't outperform othe
 
 * [Detecting Regime Change in Computational Finance](https://a.co/d/067yKkC)
 
-### Books about traders
+### Books About Traders
 
 * [The New Market Wizards: Conversations with America's Top Traders](https://a.co/d/adiG2Ig)
 
@@ -118,10 +118,23 @@ And they are correct, I really should get around to reading it.
 
 * [Reminiscences of a Stock Operator](https://amzn.eu/d/ixfco0z)
 
+### Peter L. Bernstein
+
+Peter is an economic historian and is one of the few people who could write a book about a history of probability theory that is actually interesting to read. 
+
+Against the gods, is about how probability theory was used initially to play games and then adapted for financial modeling and trading.  
+
+* [Against the Gods: The remarkable story of Risk](https://amzn.eu/e1yS79W)
+
+Power of gold is a story about the evolution of money and how gold came to be used as money.
+
+* [The Power of Gold: The History of an Obsession](https://amzn.eu/1vjA9Kq)
+
+
 ### Tail Risk Management
 
 These two books are interesting but are likely not useful for 99% of people. The idea summarised is that options can be used to hedge downside risk. 
-Options are also expensive due to theta and also in a normal market they have delta which you may not want as it interferes with the core strategy.
+Options are also expensive due to theta and also in a normal market, they have delta, which you may not want as it interferes with the core strategy.
 So by combining OTM puts and ATM calls, you can be long gamma and flat theta and delta. So you basically get free insurance.
 The reason I don't think this is for most people is the risk of an options book rarely stays the same as exactly what you wanted so it needs to be actively managed.
 If you don't know what you're doing, you might add more risk than the portfolio you're meant to be hedging.
@@ -132,7 +145,7 @@ If you don't know what you're doing, you might add more risk than the portfolio 
 ### Trading Platform and HPC
 
 This book is not the best. That said, there are not many end-to-end books on the topic of HFT trading platforms. 
-If you are new to trading platforms this is one of the few overviews I have seen.
+If you are new to trading platforms, this is one of the few overviews I have seen.
 
 * [Developing High-Frequency Trading Systems: Learn how to implement high-frequency trading](https://amzn.eu/d/8saVGdm)
 
@@ -191,7 +204,7 @@ This was a text book for my PDC and is a great book
 * [Practical Permaculture: for Home Landscapes, Your Community, and the Whole Earth](https://amzn.eu/d/9S89m2E)
 
 The Seymour book is known as the bible of self-sufficiency. It is an old book but full of useful information.
-* [The The New Complete Book of Self-Sufficiency](https://amzn.eu/d/75A6fyg)
+* [The New Complete Book of Self-Sufficiency](https://amzn.eu/d/75A6fyg)
 
 Masanobu Fukuoka’s book about farming in harmony with nature rather than fighting it. 
 * [The One-Straw Revolution: An Introduction to Natural Farming](https://amzn.eu/d/0rNmukF)
