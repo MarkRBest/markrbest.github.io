@@ -6,17 +6,30 @@ category:
 ---
 
 I have wanted to write a reading list for a while. I've been apprehensive because I didn't want to include too much and wanted also to explain why the books were in the list. 
-For example, if you trade crypto there is not much point reading the Hull IR book. This list likely will be a work in progress so keep that in mind.
+For example, if you trade crypto there is not much point reading the Hull interest rate models book. This list likely will be a work in progress so keep that in mind.
 As I write this I realise I have a problem with how many books I have.
 
 These are not referral links, they are just Amazon links. Feel free to source the books from wherever you like. 
 
 ### General 
 
+This book has a lot of interesting information. It really deserves a book review of its own. 
+I personally like the topics on fractional differencing, volume bar sampling, and hierarchical risk parity (HRP).
+My only critisim of the books is some of the more useful things cannot be used directly. 
+Volume imbalance bars, for instance, seem to degenerate in the book's implementation. 
+This is easy to correct and a solution can be found [here](https://markrbest.github.io/rust-bar-building/). 
+
 * [Advances in Financial Machine Learning](https://a.co/d/iatgtIp)
+
+Kaufman's book is more of an encyclopedia of techniques. Its useful as a reference book.
 
 * [Trading Systems and Methods](https://a.co/d/4w2G4hk)
 
+Ernies Chan's books also come well recommended. 
+
+* [Algorithmic Trading: Winning Strategies and Their Rationale](https://amzn.eu/d/7e5Oc64)
+* [Quantitative Trading: How to Build Your Own Algorithmic Trading Business](https://amzn.eu/d/37DQJne)
+ 
 ### Portfolio management
 
 This book is a must-have for anyone who wants to trade multi-asset portfolio strategies. It covers a massive range of topics around portfolio risk and portfolio construction.
@@ -46,6 +59,17 @@ He does a lot of data mining, so the books address common issues that come from 
 
 * [Statistically Sound Indicators For Financial Market Prediction: Algorithms in C++](https://a.co/d/fi2g6TS)
 * [Testing and Tuning Market Trading Systems: Algorithms in C++](https://amzn.eu/d/2T57Z9f)
+
+### Statistical Arbitrage
+
+This book has some interesting chapters about mid-correction and dealing with jumps.
+
+* [Statistical Arbitrage: Algorithmic Trading Insights and Techniques](https://amzn.eu/d/id4sMyl)
+
+This is not a book but an article. It's about how to build a risk neutral long short portfolio strategy. 
+What is nice about it, is its very simple and generic and can be used either with rich/cheap or momentum alphas. 
+
+* [The Modern Spirit of Statistical Arbitrage](https://x.com/systematicls/status/1802666506125558115?s=46&t=rrb1VDYgAE-7u13wznr-hg)
 
 ### Volume Price Analysis
 
