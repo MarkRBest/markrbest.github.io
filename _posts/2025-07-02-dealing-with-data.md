@@ -10,7 +10,7 @@ It is always interesting to get feedback from people about my blog articles.
 One that a few people have talked to me about is this
 [article](https://markrbest.github.io/message-arrival-rates-and-latency/)
 on message rates and system throughput.
-The main topic of the article was system throughput, its importance and how it relates to system latency.
+The main topic of the article was the importance of system throughput to market making platforms and how it relates to system latency.
 If you have a very performant system then likely you will not have issues, however that is only one possible solution.
 
 The aim of this article is to elaborate on the topic of throughput, how to make a system more robust, how to avoid bottlenecks and pipeline bubbles.
