@@ -6,16 +6,15 @@ category:
 - Programming
 ---
 
-It is always interesting to get feed back from people about articles.
-One that seems to have been quite well received was this
+It is always interesting to get feedback from people about my blog articles.
+One that a few people have talked to me about is this
 [article](https://markrbest.github.io/message-arrival-rates-and-latency/)
-about message rates and system through put.
-The main goal of the article was to that being fast is about more than just sending orders quickly.
-I'm not sure it discussed enough about bottlenecks and how pipeline bubble are not easy to detect.
+on message rates and system throughput.
+The main topic of the article was system throughput, its importance and how it relates to system latency.
 If you have a very performant system then likely you will not have issues, however that is only one possible solution.
 
-The aim of this article is not talk about the fact you dont always need a system that is really fast.
-It is important for specfic types of trading which deal with vast quantities of data.
+The aim of this article is to elaborate on the topic of throughput, how to make a system more robust, how to avoid bottlenecks and pipeline bubbles.
+It is important for specific types of trading which deal with vast quantities of data.
 Even if you have a fast system there are still design decisions that you might want to make to reduce the possibility of bottlenecks.
 
 ### System Architecture
@@ -41,10 +40,10 @@ flowchart LR
 
 This is a simple diagram of a trading system layout.
 The graph is directional and each component can be cpu bound to make the whole thing more cache efficient.
-It is also normal that each step in the pipeline is more complex than the previous.
+It is also normal that each step in the pipeline is more complex than the previous one.
 This point will become more important later when we talk about decoupling.
-It's important that the Order Management part is single threaded since this means there is less likely to be race conditions between orders and risk.
-The last thing you want to happens is to send taker orders when there are already fills that have not been processed.
+It's important that the Order Management part is single threaded since this means there is less likely to be race conditions between orders placement and risk.
+The last thing you want is to send taker orders when there are already fills that have not been processed.
 
 ### Reducing bottlenecks
 
@@ -53,7 +52,7 @@ The last thing you want to happens is to send taker orders when there are alread
 I know a lot of people who use python for HFT (beatz I'm looking at you).
 This is fine so long as you know what you are doing and make sure the average processing time is appropriate for the data rate.
 The simplest solution to make the amount of inflowing data manageable is to change the subscriptions.
-If you are trading low liquidity alt coins, there is no need for a highly optimised trading system.
+If you are trading low liquidity alt-coins, there is no need for a highly optimised trading system.
 (note. some smaller cap coins have insane volumes when they are pumping)
 There are aggregate trade feeds and gated order book feeds that are much less demanding to process.
 Since order books and trades are the majority of data, if the goal is to reduce the influx of data this is the best place to start.
@@ -69,13 +68,13 @@ So for this reason, it is hard to aggregate or skip some of these updates. To de
 On the other hand snapshot style feeds like L1 (top of book) or L2 feed (price snapshot, order book deltas) can be conflated.
 If the message queue has multiple L1 updates, only the latest needs to be processed.
 In the case for an L2 update, they can be merged and updates to the same side and price can be conflated.
-This means when things are busy the over all work load can be reduced.
+This means when things are busy the work load can be reduced by skipping or conflating messages.
 
 #### Decouple the producer and consumer
 
 What this means in practical terms is that not every message from the producer needs to lead to a single call to the consumer.
-This is especially true if the consumer take a lot more time to process a message than the producer took.
-Messages can either be skipped or they can be efficiently aggregated to reduce the amount of work downstream.
+This is especially true if the consumer takes a lot more time to process a message than the producer.
+Messages can either be skipped or they can be conflated to reduce the amount of work downstream.
 This in practical terms often means reading from the message queue into some form of data structure that can be used to find redundant messages or
 to aggregate say trades at the same price.
 Once the message queue is empty, or too many messages have been processed, then these cleaned messages can be processed.
@@ -87,9 +86,9 @@ If there is a bottleneck it should also allow the system to recover more quickly
 #### Split fast path and slow path
 
 Some systems might have a quant model that is quite complex and takes around 100 mics to 1ms+ to compute.
-This can be a problem if it needs to be fed raw data as there is a high chance there will be a bottleneck.
+This can be a problem if it needs to be fed raw data as trying to process every tick will lead to problems.
 
-The solution to this is just to split the paths.
+The solution is to split the processing paths.
 There is nothing stopping processing from being done on multiple cores.
 The producer, consumer pattern is very flexible as it is essentially just a directional graph (be careful of cycles).
 
@@ -120,6 +119,6 @@ The order management can then, consume these forecasts as if there were any othe
 ### Conclusion
 
 I hope this article shows that trading systems can be designed in different ways and that it is ok to not have microsecond tick to trade.
-The most important thing is to make sure the data being processed is not stale and bottle necks are kept to a minimum.
+The most important thing is to make sure the data being processed is not stale and bottlenecks are kept to a minimum.
 Even if you have a very performant system it is still good to be prepared for the worst possible events.
 Hopefully some techniques about here help and lead to you being better able to price and trade consistently irrespective of market conditions.
