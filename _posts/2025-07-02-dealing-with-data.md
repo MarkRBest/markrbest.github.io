@@ -10,10 +10,10 @@ It is always interesting to get feedback from people about my blog articles.
 One that a few people have talked to me about is this
 [article](https://markrbest.github.io/message-arrival-rates-and-latency/)
 on message rates and system throughput.
-The main topic of the article was the importance of system throughput to market making platforms and how it relates to system latency.
+It covers the importance of throughput for market making and how it relates to system latency.
 If you have a very performant system then likely you will not have issues, however that is only one possible solution.
 
-The aim of this article is to elaborate on the topic of throughput, how to make a system more robust, how to avoid bottlenecks and pipeline bubbles.
+The aim of this article is to elaborate on the topic of throughput, how to make a system more robust, how to avoid bottlenecks.
 It is important for specific types of trading which deal with vast quantities of data.
 Even if you have a fast system there are still design decisions that you might want to make to reduce the possibility of bottlenecks.
 
@@ -38,11 +38,11 @@ flowchart LR
     D -->|IPC| E
 ```
 
-This is a simple diagram of a trading system layout.
+This is a simple diagram of a trading system architecture.
 The graph is directional and each component can be cpu bound to make the whole thing more cache efficient.
 It is also normal that each step in the pipeline is more complex than the previous one.
 This point will become more important later when we talk about decoupling.
-It's important that the Order Management part is single threaded since this means there is less likely to be race conditions between orders placement and risk.
+It's important that the order management part is single threaded since this means there is less likely to be race conditions between orders placement and risk calculations.
 The last thing you want is to send taker orders when there are already fills that have not been processed.
 
 ### Reducing bottlenecks
@@ -50,22 +50,22 @@ The last thing you want is to send taker orders when there are already fills tha
 #### Reduce complexity
 
 I know a lot of people who use python for HFT (beatz I'm looking at you).
-This is fine so long as you know what you are doing and make sure the average processing time is appropriate for the data rate.
-The simplest solution to make the amount of inflowing data manageable is to change the subscriptions.
-If you are trading low liquidity alt-coins, there is no need for a highly optimised trading system.
+This is fine so long as you know what you are doing and make sure the average processing time is appropriate for the data ingestion rate.
+The simplest solution to make the amount of data manageable is to change the subscriptions.
+If you are trading low liquidity alt-coins, there is likely no need for a highly optimised trading system.
 (note. some smaller cap coins have insane volumes when they are pumping)
 There are aggregate trade feeds and gated order book feeds that are much less demanding to process.
 Since order books and trades are the majority of data, if the goal is to reduce the influx of data this is the best place to start.
 
 #### Not all data needs to be process equally
 
-Market data generally has two main types, deltas and snapshots. What does this mean and what does this matter?
+Market data generally has two main types, deltas and snapshots. What does this mean and why does this matter?
 If you are listening to an L3 order book feed every update is a change to the order book (insert, cancel etc).
 These are deltas (changes) and to have correct picture of the order book, all the deltas need to be processed.
-This is the same for trades since each trade is its own unique bit of information.
+This is the same for trades since each trade is its own unique event.
 So for this reason, it is hard to aggregate or skip some of these updates. To deal with delta style feeds, generally the code will need to be fast.
 
-On the other hand snapshot style feeds like L1 (top of book) or L2 feed (price snapshot, order book deltas) can be conflated.
+On the other hand, snapshot style feeds like L1 (top of book) or L2 feed (price snapshot, order book deltas) can be [conflated](https://en.wikipedia.org/wiki/Conflation).
 If the message queue has multiple L1 updates, only the latest needs to be processed.
 In the case for an L2 update, they can be merged and updates to the same side and price can be conflated.
 This means when things are busy the work load can be reduced by skipping or conflating messages.
@@ -85,11 +85,11 @@ If there is a bottleneck it should also allow the system to recover more quickly
 
 #### Split fast path and slow path
 
-Some systems might have a quant model that is quite complex and takes around 100 mics to 1ms+ to compute.
-This can be a problem if it needs to be fed raw data as trying to process every tick will lead to problems.
+Some systems might have a quant model that is quite complex and expensive to compute (say 100 mics to 1ms+).
+This can be a problem if it needs to be fed raw data as trying to process every tick will lead to processing stale market data.
 
 The solution is to split the processing paths.
-There is nothing stopping processing from being done on multiple cores.
+There is nothing stopping processing from being done on multiple CPU cores.
 The producer, consumer pattern is very flexible as it is essentially just a directional graph (be careful of cycles).
 
 ```mermaid
