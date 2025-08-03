@@ -53,12 +53,13 @@ df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', '
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 df.set_index('timestamp', inplace=True)
 
-# Apply convolution
+# create mask
 ema_len = 7
 ema_weights = [-1] * ema_len
 wait_time = 0
 mask = [1] + [0] * wait_time + list(np.divide(ema_weights, np.abs(np.sum(ema_weights))))
 
+# Apply convolution
 convolved = np.convolve(df['close'], np.array(mask), mode='same')  # keep output same length
 
 convolved[-len(mask):] = np.nan
