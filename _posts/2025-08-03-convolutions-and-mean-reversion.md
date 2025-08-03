@@ -16,7 +16,11 @@ Well, yes, so long as it is an average in the future.
 
 ### Implementation
 
-When we look at log returns $return_{t} = ln\frac{price_{t}}{price_{t-1}}$ they are very noisy.
+When we look at log returns
+
+$$ r_{t} = ln\frac{price_{t}}{price_{t-1}} $$
+
+is that they are very noisy.
 But let's say we want to buy a position today and then sell it bit by bit over the next 7 days. What would that look like?
 
 Using a filter like this, we can see the effective returns of such a strategy.
