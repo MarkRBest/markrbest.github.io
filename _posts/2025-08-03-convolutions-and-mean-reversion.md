@@ -16,7 +16,7 @@ Well, yes, so long as it is an average in the future.
 
 ### Implementation
 
-When we look at log returns
+The problem with log returns
 
 $$ r_{t} = ln\frac{price_{t}}{price_{t-1}} $$
 
