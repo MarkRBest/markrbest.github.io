@@ -64,13 +64,9 @@ wait_time = 0
 mask = [1] + [0] * wait_time + list(np.divide(ema_weights, np.abs(np.sum(ema_weights))))
 
 # Apply convolution
-convolved = np.convolve(df['close'], np.array(mask), mode='same')  # keep output same length
-
-convolved[-len(mask):] = np.nan
-convolved[:len(mask)] = np.nan
-
-# Add convolved result to DataFrame
-df['convolved'] = convolved
+convolved =  np.convolve(df['close'], np.array(mask), mode='full')  # keep output same length
+convolved[-(len(mask)-1):] = np.nan
+df["convolved"] = convolved[len(mask)-1:]
 
 subtitles = [f"{symbol} Prices"]
 nrows = len(subtitles)
