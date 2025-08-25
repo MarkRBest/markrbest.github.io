@@ -43,6 +43,31 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 from plotly.subplots import make_subplots
+from numpy.typing import NDArray
+
+def make_mask(entry_len: int, wait_time: int, exit_len: int) -> NDArray[np.float64]:
+    entry_ma_weights = [-1] * entry_len
+    exit_ema_weights = [+1] * exit_len
+    
+    mask = np.array(list(np.divide(entry_ma_weights, np.abs(np.sum(entry_ma_weights))))
+        + ([0] * wait_time) + 
+                    list(np.divide(exit_ema_weights, np.abs(np.sum(exit_ema_weights)))))
+    return mask
+
+def rolling_dot(series: NDArray[np.float64], mask: NDArray[np.float64]) -> NDArray[np.float64]:
+    n = len(mask)
+    if n > len(series):
+        raise ValueError("mask longer than series")
+
+    # Construct sliding windows
+    strided = np.lib.stride_tricks.sliding_window_view(series, n)
+    # Each row is one window, so we do row-wise dot
+    res = strided @ mask
+
+    output = np.empty(len(series))
+    output[-(len(mask)-1):] = np.nan
+    output[:len(res)] = res
+    return output
 
 # Download historical daily data
 exchange = ccxt.binance()
@@ -57,16 +82,9 @@ df = pd.DataFrame(ohlcv, columns=['timestamp', 'open', 'high', 'low', 'close', '
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 df.set_index('timestamp', inplace=True)
 
-# create mask
-ema_len = 7
-ema_weights = [-1] * ema_len
-wait_time = 0
-mask = [1] + [0] * wait_time + list(np.divide(ema_weights, np.abs(np.sum(ema_weights))))
-
-# Apply convolution
-convolved =  np.convolve(df['close'], np.array(mask), mode='full')  # keep output same length
-convolved[-(len(mask)-1):] = np.nan
-df["convolved"] = convolved[len(mask)-1:]
+# compute returns
+mask = make_mask(1, 0, 7)
+df["convolved"] = rolling_dot(df["close"], mask) 
 
 subtitles = [f"{symbol} Prices"]
 nrows = len(subtitles)
@@ -109,7 +127,7 @@ This means that the exit price is less dependent on chance, and it should be eas
 It should also be noted that the autocorrelation of the returns should be avoided, as the returns themselves are not really known until much later.
 Forecasting should be done with signals independent of the return series.
 
-### Forcasting
+### Forecasting
 
 The ultimate aim of this is to be able to predict returns using a set of features. This might be momentum, price extension, OI, funding, you name it.
 The hope is that using these returns as a dependent variable should make it much easier for machine learning to find something stable out of sample.
